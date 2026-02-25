@@ -238,12 +238,14 @@ de raio 4 dever´a ser
 
 void circulo (int raio) {
     int x, y;
+    int caracteres = 0;
     //Ciclo no Eixo Y
     for (y = raio; y >= -raio; y--) {
         //Ciclo no Eixo x
         for ( x = -raio; x <= raio; x++) {
             if (x*x + y*y <= raio*raio) {
                 putchar ('#'); //se a posição estiver dentro do raio, imprimimos cardinal
+                caracteres++;
             }
             else {
                 putchar (' ');
@@ -251,9 +253,13 @@ void circulo (int raio) {
         }
         putchar ('\n');
     }
+    printf("Foram usados %d caracteres\n", caracteres);
 }
 
 int main() {
-    circulo (3);
+    int r;
+    printf("Insira o raio desejado\n");
+    scanf("%d", &r);
+    circulo(r);
     return 0;
 }

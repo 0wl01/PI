@@ -69,9 +69,52 @@ int media() {
     return 0;
 }
 
+/*
+3. Defina um programa que lˆe (usando a fun¸c˜ao scanf uma sequˆencia de n´umeros inteiros ter-
+minada com o n´umero 0 e imprime no ecran o segundo maior elemento.
+*/
+
+int segMaior() {
+    int numero, maior = -1, secmaior = -1;
+
+    printf("Insira a sequência de números a terminar em '0':\n");
+    //Lê o primeiro numero
+    scanf("%d", &numero);
+    maior = numero;
+
+    if (numero == 0) {
+        printf("Sequência vazia\n");
+        return 0;
+    }
+
+    while (numero != 0) {
+        scanf("%d", &numero);
+        if (maior < numero) {
+            secmaior = maior; //o antigo maior passa para baixo
+            maior = numero; //o novo maior sobe ao torno
+        }
+
+        else if (numero > secmaior && numero != maior) {
+            secmaior = numero;
+        }
+    }
+
+    printf("O segundo maior número é: %d\n", secmaior);
+
+    return 0;
+}
+
+/*
+4. Defina uma fun¸c˜ao int bitsUm (unsigned int n) que calcula o n´umero de bits iguais a 1
+usados na representa¸c˜ao bin´aria de um dado n´umero n
+*/
+
+int bitsUm (unsigned int n) {
+    
+}
 
 int main() {
-    media();
+    segMaior();
 
     return 0;
 }
