@@ -156,11 +156,90 @@ int qDig (unsigned int n) {
     return digitos;
 }
 
+/*
+7. Apresente uma definicao da funcao pre-definida em C char *strcat (char s1[], char
+s2[]) que concatena a string s2 a s1 (retornando o endereco da primeira).
+*/
+
+char *strcat (char s1[], char s2[]) {
+    int i = 0, j = 0;
+    //Avançamos até a posição de '\0' em s1
+    while (s1[i] != '\0') i++;
+    //Estando no final da primeira string começamos a avançar posições 
+    while (s2[j] != '\0') {
+        s1[i] = s2[j]; //copiando a sting2 à frente do fim da s1
+        i++;
+        j++;
+    }
+
+    //E fechamos a nova s1
+    s1[i] = '\0';
+
+    return s1;
+}
+/*
+8. Apresente uma definicao da funcao pre-definida em C char *strcpy (char *dest, char
+source[]) que copia a string source para dest retornando o valor desta  ́ultima.
+*/
+
+char *strcpy (char *dest, char source[]) {
+    int i = 0;
+
+    while (source[i] != '\0') {
+        dest[i] = source[i];
+        i++;
+    }
+    dest[i] = '\0';
+
+    return dest;
+}
+
+/*
+9. Apresente uma definicao da funcao pre-definida em C int strcmp (char s1[], char s2[])
+que compara (lexicograficamente) duas strings. O resultado devera ser
+•0 se as strings forem iguais
+•<0 se s1 < s2
+•>0 se s1 > s2
+*/
+
+int strcmp (char s1[], char s2[]) {
+    int i = 0;
+
+
+    while (s1[i] == s2[i] && s1[i] != '\0') i++;
+
+    return s1[i] - s2[i];
+}
+
+/*
+10. Apresente uma definicao da funcao pre-definida em C char *strstr (char s1[], char
+s2[]) que determina a posicao onde a string s2 ocorre em s1. A funcao devera retornar
+NULL caso s2 nao ocorra em s1.
+*/
+
+char *mystrstr(char s1[], char s2[]) {
+    char *res = NULL;
+    int i,p;
+    
+    if (s2[0] == '\0') return s1;
+    
+    for(i = 0; s1[i] != '\0' && res == NULL; i++) {
+        for(p = 0; s2[p] != '\0' && s2[p] == s1[i+p];p++);
+        if (s2[p] == '\0')
+        res = s1 + i;
+    }
+    return res;
+}
 
 int main() {
-    int digitos = qDig(44014);
+    char s2[] = "ADORO \0";
+    char s1[] = "CONA\0";
+    
+    // Chamamos a função (s1 será alterada diretamente)
+    strcpy(s1, s2);
 
-    printf("Digitos:%d\n", digitos);
+    // %s para imprimir a string completa
+    printf("Resultado: %s\n", s1); 
 
     return 0;
 }
