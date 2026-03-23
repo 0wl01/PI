@@ -155,6 +155,8 @@ int qDig (unsigned int n) {
 
     return digitos;
 }
+
+
 int main() {
     int digitos = qDig(44014);
 
