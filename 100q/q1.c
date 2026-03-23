@@ -70,8 +70,9 @@ int media() {
 }
 
 /*
-3. Defina um programa que lˆe (usando a fun¸c˜ao scanf uma sequˆencia de n´umeros inteiros ter-
-minada com o n´umero 0 e imprime no ecran o segundo maior elemento.
+3. Defina um programa que lˆe (usando a fun¸c˜ao scanf uma sequˆencia 
+de n´umeros inteiros terminada com o n´umero 0 e imprime no ecran o 
+segundo maior elemento.
 */
 
 int segMaior() {
@@ -105,16 +106,59 @@ int segMaior() {
 }
 
 /*
-4. Defina uma fun¸c˜ao int bitsUm (unsigned int n) que calcula o n´umero de bits iguais a 1
-usados na representa¸c˜ao bin´aria de um dado n´umero n
+4. Defina uma fun¸c˜ao int bitsUm (unsigned int n) que calcula o 
+n´umero de bits iguais a 1 usados na representa¸c˜ao bin´aria de 
+um dado n´umero n
 */
 
 int bitsUm (unsigned int n) {
-    
+    int contador = 0;
+
+    while (n != 0) {
+        if (n % 2 == 1 ) {
+            contador++;
+        }
+    n /= 2;
+    }
+    return contador;
+
 }
 
+/*
+5. Defina uma fun¸c˜ao int trailingZ (unsigned int n) que 
+calcula o n´umero de bits a 0 no final da representa¸c˜ao 
+bin´aria de um n´umero (i.e., o expoente da maior potˆencia 
+de 2 que ´e divisor desse n´umero).
+*/
+
+int trailingZ (unsigned int n) {
+    int i, contador = 0;
+
+    for (i = n; i < n; i /= 2) {
+        if (i % 2 == 0) contador++;
+    }
+    return contador;
+}
+
+/*
+6. Defina uma funcao int qDig (unsigned int n) que calcula o numero de dıgitos necessarios
+para escrever o inteiro n em base decimal. Por exemplo, qDig (440) deve retornar 3.
+*/
+
+int qDig (unsigned int n) {
+    int digitos = 0;
+
+    do {
+        digitos++;
+        n /= 10;
+    } while (n > 0);
+
+    return digitos;
+}
 int main() {
-    segMaior();
+    int digitos = qDig(44014);
+
+    printf("Digitos:%d\n", digitos);
 
     return 0;
 }

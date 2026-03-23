@@ -1,8 +1,10 @@
-# PI
+# Programação Imperativa
 Programação Imperativa | UM
 
-Ficha 1 : ✔️
-Ficha 2: ✔️
+## Fichas Práticas
+- []
+- []
+- []
 
-100 Questões
-Parte 1: 2 feitas
+## 100 Questões
+- [] Parte 1 - 10% *(5/50)*
