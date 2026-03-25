@@ -231,15 +231,103 @@ char *mystrstr(char s1[], char s2[]) {
     return res;
 }
 
-int main() {
-    char s2[] = "ADORO \0";
-    char s1[] = "CONA\0";
-    
-    // Chamamos a função (s1 será alterada diretamente)
-    strcpy(s1, s2);
+/*
+11. Defina uma funcao void strrev (char s[]) que inverte uma string.
+*/
 
-    // %s para imprimir a string completa
-    printf("Resultado: %s\n", s1); 
+void strrev (char s[]) {
+    char temp;
+    int i = 0, j = 0;
+
+    //Chegar ao fim da string
+    while(s[i] != '\0') i++;
+    i--;
+
+    while (i > j) {
+        temp = s[j]; // O char inicial vai para a temp
+        s[j] = s[i]; // o char final vai para o inicio
+        s[i] = temp; // o char inicial que estava na temp vai para o fim
+
+        i--; // i vai para o penultimo
+        j++; // j vai para o segundo
+        //E continuamos até chegar ao meio efetivamente trocando abcde para edcba
+    }  
+}
+
+/*
+12. Defina uma funcao void strnoV (char s[]) que retira todas as vogais de uma string.
+*/
+
+//Função Auxiliar isVogal que retorna 0 (Falso) senão for Vogal e 1 (True) se for.
+int isVogal (char c) {
+    int i;
+    char v [] = "aeiouAEIOU";
+    for (i = 0; v[i] != '\0'; i++) {
+        if (c == v[i]) return 1;
+    }
+    return 0;
+}
+
+void strnoV (char s[]) {
+    int read, write = 0;
+    for(read = 0; s[read] != '\0'; read++) {
+        if (!isVogal(s[read])) {
+            s[write] = s[read];
+            write++;
+        }
+    }
+    s[write] = '\0';
+}
+
+/*
+13. Defina uma funcao void truncW (char t[], int n) que dado um texto t com varias palavras
+(as palavras estao separadas em t por um ou mais espacos) e um inteiro n, trunca todas as 
+palavras de forma a terem no maximo n caracteres. Por exemplo, se a string txt
+contiver "liberdade, igualdade e fraternidade", a invocacao de truncW (txt, 4) deve
+fazer com que passe a estar l ́a armazenada a string "libe igua e frat"
+*/
+
+void truncW (char t[], int n) {
+    int read, write = 0;
+    int counter = 0;
+
+    for (read = 0; t[read] != '\0'; read++) {
+        // Se lermos um ' ', escrevemos o espaço e damos reset ao counter
+        if (t[read] == ' ') {
+            t[write] = t[read];
+            write++;
+            counter = 0;
+        }
+        // Otherwise, se ultrupassarmos o counter truncamos
+        else if (counter < n) {
+            t[write] = t[read];
+            write++;
+            counter++;
+        }
+    }
+    t[write] = '\0';
+}
+
+/*
+14. Defina uma funcao char charMaisfreq (char s[]) que determina qual o caracter mais frequente
+numa string. A funcao devera retornar 0 no caso de s ser a string vazia.
+*/
+
+char charMaisFreq (char s[] {
+    int freq[256] = {0}; // Criamos um Array de Frequências cheio de 0's
+    int i;
+
+    for (i = 0; s[i] != '\0'; i++) {
+        
+    }
+
+})
+
+int main() {
+    char s2[] = "ADORO CONA\0";
+    printf("String inicial %s\n", s2);
+    truncW(s2, 3);
+    printf("Resultado: %s\n", s2); 
 
     return 0;
 }
