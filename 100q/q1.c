@@ -369,33 +369,49 @@ comprimento da maior sub-string com caracteres diferentes. Por exemplo, difConse
 */
 
 int difConsecutivos (char s[]) {
-    int i, freq = 1, max = 1;
-    char atual = s[0];
+    int posicoes[256];
+    int i, max = 0, inicio = 0;
 
-    if (atual == '\0')  {
-        return 0;
-    }
+    for (i = 0; i < 256; i++) posicoes[i] = -1;
 
-    for(i = 1; s[i] != '\0'; i++) {
-        if (s[i] != atual) {
-            freq ++
-            if (freq > max) {
-                max = freq;
-            }
+    for (i = 0; s[i] != '\0'; i++) {
+        // c é var local para cada letra da string
+        unsigned char c = (unsigned char)s[i];
+
+        if (posicoes[c] >= inicio) {
+            inicio = posicoes[c] + 1;
         }
-        else {
-            atual = s[i];
-            freq = 1;
+
+        posicoes[c] = i;
+
+        int tamanho_atual = i - inicio + 1;
+        if (tamanho_atual > max) {
+            max = tamanho_atual;
         }
     }
     return max;
 }
+/*
+17. Defina uma funcao int maiorPrefixo (char s1 [], char s2 []) que calcula o
+comprimento do maior prefixo comum entre as duas strings.
+*/
+
+int maiorPrefixo (char s1[], char s2[]) {
+    int i = 0;
+
+    while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i]) {
+        i++;
+
+    }
+    return i;
+}
 
 int main() {
+    char s1[] = "Adorava ganhar ao RONALDO SIUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU\0";
     char s2[] = "Adorava ganhar o Euromilhoes em vez de estar a estudar esta merdaaaaaaaaaaaaaaaaaa\0";
-    printf("String inicial %s\n", s2);
-    char s = charMaisFreq(s2);
-    printf("Mais frequente: %c\n", s); 
+    printf("Strings iniciais %s\n%s\n", s1 ,s2);
+    int s = maiorPrefixo(s1,s2);
+    printf("Prefixo Partilhado: %i\n", s); 
 
     return 0;
 }
