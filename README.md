@@ -7,4 +7,4 @@ Programação Imperativa | UM
 - [ ] Ficha 3
 
 ## 100 Questões
-- [ ] Parte 1 - 26% *(13/50)*
+- [ ] Parte 1 - 30% *(15/50)*
