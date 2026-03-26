@@ -313,21 +313,89 @@ void truncW (char t[], int n) {
 numa string. A funcao devera retornar 0 no caso de s ser a string vazia.
 */
 
-char charMaisFreq (char s[] {
+char charMaisFreq (char s[]) {
     int freq[256] = {0}; // Criamos um Array de Frequências cheio de 0's
-    int i;
+    int i = 0, max = 0;
+    char a = 0;
 
+    //Percorremos a String guardando as frequências
     for (i = 0; s[i] != '\0'; i++) {
-        
+        freq[ (unsigned char)s[i] ]++;
     }
 
-})
+    //Depois de ter a lista de frequências corremos a mesma
+    for (i = 0; i < 256; i++) {
+        if (freq[i] > max) {
+            max = freq[i];
+            a = i;
+        }
+    }
+    return a;
+}
+
+/*
+15. Defina uma funcao int iguaisConsecutivos (char s[]) que, dada uma string s calcula o
+comprimento da maior sub-string com caracteres iguais. Por exemplo, iguaisConsecutivos
+("ababaabcccaac") deve dar como resultado 3, correspondendo a repeticao "ccc".
+*/
+
+int iguaisConsecutivos (char s[]) {
+    int i, freq = 1, max = 1;
+    char atual = s[0];
+
+    if (s[0] == '\0')
+        return 0;
+
+
+    for (i = 1; s[i] != '\0'; i++) {
+        if (s[i] != atual) {
+            atual = s[i];
+            freq = 1;
+        }
+        else {
+            freq++;
+            if (freq > max) {
+                max = freq;
+            }
+        }
+    }
+    return max;
+}
+
+/*
+16. Defina uma funcao int difConsecutivos (char s[]) que, dada uma string s calcula o
+comprimento da maior sub-string com caracteres diferentes. Por exemplo, difConsecutivos
+("ababcaccaac") deve dar como resultado 3, correspondendo (por exemplo) a string "abc".
+*/
+
+int difConsecutivos (char s[]) {
+    int i, freq = 1, max = 1;
+    char atual = s[0];
+
+    if (atual == '\0')  {
+        return 0;
+    }
+
+    for(i = 1; s[i] != '\0'; i++) {
+        if (s[i] != atual) {
+            freq ++
+            if (freq > max) {
+                max = freq;
+            }
+        }
+        else {
+            atual = s[i];
+            freq = 1;
+        }
+    }
+    return max;
+}
 
 int main() {
-    char s2[] = "ADORO CONA\0";
+    char s2[] = "Adorava ganhar o Euromilhoes em vez de estar a estudar esta merdaaaaaaaaaaaaaaaaaa\0";
     printf("String inicial %s\n", s2);
-    truncW(s2, 3);
-    printf("Resultado: %s\n", s2); 
+    char s = charMaisFreq(s2);
+    printf("Mais frequente: %c\n", s); 
 
     return 0;
 }
