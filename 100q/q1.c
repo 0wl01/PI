@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /*
 1. Defina um programa que lˆe (usando a fun¸c˜ao scanf uma sequˆencia de n´umeros inteiros ter-
@@ -161,7 +162,7 @@ int qDig (unsigned int n) {
 s2[]) que concatena a string s2 a s1 (retornando o endereco da primeira).
 */
 
-char *strcat (char s1[], char s2[]) {
+char *mystrcat (char s1[], char s2[]) {
     int i = 0, j = 0;
     //Avançamos até a posição de '\0' em s1
     while (s1[i] != '\0') i++;
@@ -182,7 +183,7 @@ char *strcat (char s1[], char s2[]) {
 source[]) que copia a string source para dest retornando o valor desta  ́ultima.
 */
 
-char *strcpy (char *dest, char source[]) {
+char *mystrcpy (char *dest, char source[]) {
     int i = 0;
 
     while (source[i] != '\0') {
@@ -202,7 +203,7 @@ que compara (lexicograficamente) duas strings. O resultado devera ser
 •>0 se s1 > s2
 */
 
-int strcmp (char s1[], char s2[]) {
+int mystrcmp (char s1[], char s2[]) {
     int i = 0;
 
 
@@ -406,12 +407,105 @@ int maiorPrefixo (char s1[], char s2[]) {
     return i;
 }
 
+
+/*18. Defina uma fun ̧c ̃ao int maiorSufixo (char s1 [], char s2 []) que calcula o compri-
+mento do maior sufixo comum entre as duas strings.
+*/
+
+int maiorSufixo (char s1[], char s2[]) {
+    int i = strlen(s1);
+    int j = strlen(s2);
+    int contador = 0;
+
+    while (i > 0 && j > 0 && s1[i -1] == s2[j - 1]){
+        i--;
+        j--;
+        contador++;
+    }
+    return contador;
+}
+
+/*
+19. Defina a funcao int sufPref (char s1[], char s2[]) que calcula o tamanho do maior
+sufixo de s1 que  ́e um prefixo de s2. Por exemplo sufPref("batota","totalidade") deve
+dar como resultado 4, uma vez que a string "tota" e um sufixo de "batota" e um prefixo de
+"totalidade".
+*/
+
+int sufPref (char s1[], char s2[]) {
+    int i, tamanho;
+    int n1 = strlen(s1);
+
+    for (i = 0; s1[i] != '\0'; i++) {
+        tamanho = maiorPrefixo(&s1[i], s2);
+
+        if (tamanho == (n1 - i)) {
+            return tamanho;
+        }
+    }
+    return 0;
+}
+
+/*
+20. Defina uma funcao int contaPal (char s[]) que conta as palavras de uma string. Uma
+palavra e uma sequencia de caracteres (diferentes de espaco) terminada por um ou mais
+espacos. Assim se a string p tiver o valor "a a bb a", o resultado de contaPal (p) deve ser
+4.
+*/
+
+int contaPal (char s[]) {
+    int i, palavras = 0;
+
+    for (i = 0; s[i] != '\0'; i++) {
+        if (s[i] != ' ') {
+            while(s[i] != ' ' && s[i] != '\0') {
+                i++;
+            
+            }
+            palavras++;
+            i--; //senão o for salta s[i]
+        }
+    }
+    return palavras;
+}
+
+/*
+21. Defina uma funcao int contaVogais (char s[]) que retorna o numero de vogais da strings
+Nao se esqueca de considerar tanto maiusculas como minusculas
+*/
+
+int contaVogais (char s[]) {
+    int i,j, vogais = 0;
+    char v [] = "aeiouAEIOU";
+
+    // Ciclo para percorrer 
+    for (i = 0; s[i] != '\0'; i++) {
+        for(j = 0; v[j] != '\0';j++){
+            if (s[i] == v[j]) {
+                vogais++;
+                break;
+            }
+        }
+    }
+    return vogais;
+}
+
+/*
+22. Defina uma funcao int contida (char a[], char b[]) que testa se todos os caracteres da
+primeira string tambem aparecem na segunda. Por exemplo, contida ("braga","bracara
+augusta") deve retornar verdadeiro enquanto que contida ("braga","bracarense") deve
+retornar falso.
+*/
+
+int contida (char s[], char b[]) {
+
+}
+
 int main() {
-    char s1[] = "Adorava ganhar ao RONALDO SIUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU\0";
-    char s2[] = "Adorava ganhar o Euromilhoes em vez de estar a estudar esta merdaaaaaaaaaaaaaaaaaa\0";
-    printf("Strings iniciais %s\n%s\n", s1 ,s2);
-    int s = maiorPrefixo(s1,s2);
-    printf("Prefixo Partilhado: %i\n", s); 
+    char s2[] = "OTORRINOLORINGOLOGISTA\0";
+    printf("Strings iniciais %s\n", s2);
+    int s = contaVogais(s2);
+    printf("Numero de vogais: %i\n", s); 
 
     return 0;
 }
