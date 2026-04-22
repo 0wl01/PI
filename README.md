@@ -24,12 +24,19 @@ Programação Imperativa | UM
 - [X] Ficha 1
 - [X] Ficha 2
 - [ ] Ficha 3
-    - ![Progress](https://geps.dev/progress/15)
+- [ ] Ficha 4
+- [ ] Ficha 5
+- [ ] Ficha 6
+- [ ] Ficha 7
+- [ ] Ficha 8
+- [ ] Ficha 9
+- [ ] Ficha 10
+    - ![Progress](https://geps.dev/progress/20)
 </details>
 
 <details>
 ## 100 Questões
-- [ ] Parte 1 - 30% *(15/50)*
+- [X] Parte 1 - 30% *(15/50)*
 - [ ] Parte 2 - 0% *(0/50)*
     - ![Progress](https://geps.dev/progress/15)
 </details>
