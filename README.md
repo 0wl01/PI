@@ -20,7 +20,7 @@ Programação Imperativa | UM
 </details>
 
 <details>
-<summary><b>📜🛠️ Fichas Práticas 🛠️📜</b></summary>
+<summary><b>📜🛠️ Relatório Fichas Práticas 🛠️📜</b></summary>
 
 - [X] Ficha 1
 - [X] Ficha 2
@@ -32,16 +32,16 @@ Programação Imperativa | UM
 - [ ] Ficha 8
 - [ ] Ficha 9
 - [ ] Ficha 10
-    - ![Progress](https://geps.dev/progress/20)
+- ![Progress](https://geps.dev/progress/20)
 
 </details>
 
 <details>
-<summary><b>⁉️🛠️ 100 Questões 🛠️⁉️</b></summary>
+<summary><b>⁉️🛠️ Relatório 100 Questões 🛠️⁉️</b></summary>
 
 ## 100 Questões
 - [X] Parte 1 - 30% *(15/50)*
 - [ ] Parte 2 - 0% *(0/50)*
-    - ![Progress](https://geps.dev/progress/15)
+- ![Progress](https://geps.dev/progress/15)
 
 </details>
