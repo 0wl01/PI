@@ -16,11 +16,12 @@ Programação Imperativa | UM
 
 ### 🎓 Teste Final (80% da nota final)
 - [ ] **Teste Final** (27 Mai) — *Nota: __ / 20*
+
 </details>
 
 <details>
+<summary><b>📜🛠️ **Fichas Práticas** 🛠️📜</b></summary>
 
-## Fichas Práticas
 - [X] Ficha 1
 - [X] Ficha 2
 - [ ] Ficha 3
@@ -32,11 +33,15 @@ Programação Imperativa | UM
 - [ ] Ficha 9
 - [ ] Ficha 10
     - ![Progress](https://geps.dev/progress/20)
+
 </details>
 
 <details>
+<summary><b>⁉️🛠️ **100 Questões** 🛠️⁉️</b></summary>
+
 ## 100 Questões
 - [X] Parte 1 - 30% *(15/50)*
 - [ ] Parte 2 - 0% *(0/50)*
     - ![Progress](https://geps.dev/progress/15)
+
 </details>
