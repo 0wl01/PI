@@ -2,7 +2,7 @@
 Programação Imperativa | UM
 
 <details>
-<summary><b>📖🎓Ver Progresso da Avaliação🎓📖</b> </summary>
+<summary><b>📖🎓 Ver Progresso da Avaliação 🎓📖</b> </summary>
 
 ## Avaliação
 ### 📝 Mini-Testes (20% da nota final)
@@ -20,7 +20,7 @@ Programação Imperativa | UM
 </details>
 
 <details>
-<summary><b>📜🛠️ **Fichas Práticas** 🛠️📜</b></summary>
+<summary><b>📜🛠️ Fichas Práticas 🛠️📜</b></summary>
 
 - [X] Ficha 1
 - [X] Ficha 2
@@ -37,7 +37,7 @@ Programação Imperativa | UM
 </details>
 
 <details>
-<summary><b>⁉️🛠️ **100 Questões** 🛠️⁉️</b></summary>
+<summary><b>⁉️🛠️ 100 Questões 🛠️⁉️</b></summary>
 
 ## 100 Questões
 - [X] Parte 1 - 30% *(15/50)*
