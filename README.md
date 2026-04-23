@@ -40,8 +40,8 @@ Programação Imperativa | UM
 <summary><b>⁉️🛠️ Relatório 100 Questões 🛠️⁉️</b></summary>
 
 ## 100 Questões
-- [X] Parte 1 - 30% *(15/50)*
+- [X] Parte 1 - 60% *(30/50)*
 - [ ] Parte 2 - 0% *(0/50)*
-- ![Progress](https://geps.dev/progress/15)
+- ![Progress](https://geps.dev/progress/30)
 
 </details>

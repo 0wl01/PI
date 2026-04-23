@@ -498,14 +498,232 @@ retornar falso.
 */
 
 int contida (char s[], char b[]) {
+    int i, j, flag;
 
+    for (i = 0; s[i] != '\0'; i++) {
+        flag = 0;
+        for (j = 0; b[j] != '\0'; j++) {
+            if (s[i] == b[j]) {
+                flag = 1;
+                break;
+            }
+        }
+        if (flag == 0) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+/*
+23. Defina uma funcao int palindorome (char s[]) que testa se uma palavra  ́e palındrome,
+i.e., le-se de igual forma nos dois sentidos.
+*/
+
+int palindrome (char s[]) {
+    int i, j;
+
+    for (j = 0; s[j] != '\0'; j++);
+    j--;
+
+    for (i = 0; i < j; ) {
+        if (s[i] != s[j]) {
+            return 0;
+        }
+        i++;
+        j--;
+    }
+    return 1;
+}
+
+/*
+24. Defina uma funcao int remRep (char x[]) que elimina de uma string todos os caracteres
+que se repetem sucessivamente deixando la apenas uma copia. A funcao devera retornar o
+comprimento da string resultante. Assim, por exemplo, ao invocarmos a funcao com uma
+vector contendo "aaabaaabbbaaa", o vector deve passar a conter a string "ababa" e a funcao
+devera retornar o valor 5.
+*/
+
+int remRep (char x[]) {
+    if (x[0] == '\0') return 0;
+
+    int i;
+    int j = 1;
+
+    for (i = 1; x[i] != '\0'; i++) {
+        if (x[i] != x[i - 1]) {
+            x[j] = x[i];
+            j++;
+        }
+    }
+    x[j] = '\0';
+    return j;
+}
+
+/*
+25. Defina uma funcao int limpaEspacos (char t[]) que elimina repeticoes sucessivas de espacos
+por um unico espaco. A funcao deve retornar o comprimento da string resultante.
+*/
+
+int limpaEspacos (char t[]) {
+    // Se a string for vazia, devolvemos 0
+    if (t[0] == '\0') return 0;
+
+    int i;
+    int j = 1; // A caneta começa na posição 1
+
+    for (i = 1; t[i] != '\0'; i++) {
+        
+        // Se NÃO for um duplo espaço, escrevemos!
+        if (t[i] != ' ' || t[i - 1] != ' ') {
+            t[j] = t[i];
+            j++;
+        }
+    }
+    
+    t[j] = '\0';
+    return j;
+}
+
+/*
+26. Defina uma funcao void insere (int v[], int N, int x) que insere um elemento (x) num
+vector ordenado. Assuma que as N primeiras posicoes do vector estao ordenadas e que por
+isso, apos a insercao o vector tera as primeiras N+1 posicoes ordenadas.
+*/
+
+void insere (int v[], int N, int x) {
+    int j = N - 1;
+    int i;
+    // Enquanto o elemento inserido for menor empurramos para a direita
+    while (x < v[j] && j >= 0) {
+        v[j+1] = v[j];
+        j--;
+    }
+    // Insere o X no buraco criado ao empurrar para a direita
+    v[j+1] = x;
+}
+
+/*
+27. Defina uma funcao void merge (int r [], int a[], int b[], int na, int nb) que, dados
+vectores ordenados a (com na elementos) e b (com nb elementos), preenche o vector r
+(com na+nb elementos) com os elementos de a e b ordenados.
+*/
+
+void merge (int r[], int a[], int b[], int na, int nb) {
+    int write = 0;
+    int readA = 0, readB = 0;
+    
+    //Enquanto há elementos em ambos
+    while (readA < na && readB < nb) {
+        if (a[readA] < b[readB]) {
+            r[write] = a[readA];
+            readA++;
+        }
+        else {
+            r[write] = b[readB];
+            readB++;
+        }
+        write++;
+    }
+
+    //a leftovers
+    while (readA < na) {
+        r[write] = a[readA];
+        readA++;
+        write++;
+    }
+
+    //b leftovers
+    while (readB < nb) {
+        r[write] = b[readB];
+        readB++;
+        write++;
+    }
+}
+
+/*
+28. Defina uma funcao int crescente (int a[], int i, int j) que testa se os elementos do
+vector a, entre as posicoes i e j (inclusive) estao ordenados por ordem crescente. A funcao
+deve retornar 1 ou 0 consoante o vector esteja ou nao ordenado.
+*/
+
+int crescente (int a[], int i, int j) {
+    if (i == j) return 1;
+
+    int k, ordenados = 1;
+
+    for (k = i; k < j; k++) {
+        if (a[k] > a[k+1]) return 0;
+    }
+    return 1;
+}
+
+/*
+29. Defina uma funcao int retiraNeg (int v[], int N) que retira os numeros negativos de
+um vector com N inteiros. A funcao deve retornar o numero de elementos que nao foram
+retirados.
+*/
+
+int retiraNeg (int v[], int N) {
+    int i, write = 0;
+
+    for (i = 0; i < N; i++) {
+        if (v[i] >= 0) {
+            v[write] = v[i];
+            write++;
+        }
+    }
+    return write;
+}
+
+/*
+30. Defina uma funcao int menosFreq (int v[], int N) que recebe um vector v com N elementos
+ ordenado por ordem crescente e retorna o menos frequente dos elementos do vector.
+Se houver mais do que um elemento nessas condicoes deve retornar o que comeca por
+aparecer no ındice mais baixo.
+*/
+
+int menosFreq (int v[], int N) {
+    int menorFreq = N;
+    int i, res = v[0];
+    int Counter = 1;
+
+    for (i = 1; i < N; i++) {
+        if (v[i] != v[i-1]) {
+            if (Counter < menorFreq) {
+            menorFreq = Counter;
+            res = v[i-1];
+            }
+            // Restart counter for v[i]
+            Counter = 1;
+        }
+        else {
+            Counter++;
+        }
+
+        if (Counter < menorFreq) {
+        res = v[N-1];
+    }
+    }
+    return res;
 }
 
 int main() {
-    char s2[] = "OTORRINOLORINGOLOGISTA\0";
-    printf("Strings iniciais %s\n", s2);
-    int s = contaVogais(s2);
-    printf("Numero de vogais: %i\n", s); 
+    int meuArray[10] = {10, 20, 30, 40, 50}; 
+    int N;
+    int novoX = 25;
+
+    printf("Array antes da inserção: ");
+    for (int i = 0; i < N; i++) printf("%d ", meuArray[i]);
+    printf("\n");
+
+    // 2. Chamamos a função
+    insere(meuArray, N, novoX);
+    N++; // Agora o array tem N+1 elementos ordenados [cite: 110, 112]
+
+    printf("Array depois de inserir %d: ", novoX);
+    for (int i = 0; i < N; i++) printf("%d ", meuArray[i]);
+    printf("\n");
 
     return 0;
 }
