@@ -11,7 +11,7 @@ Programação Imperativa | UM
 | Mini-Teste 1 (Online) | 04 Mar | [X] | 4/4 |
 | Mini-Teste 2 (TP) | 27 Mar Abr | [X] | 4/4 |
 | Mini-Teste 3 (Online) | 7 Abr | [X] | 4/4 |
-| Mini-Teste 4 (Online) | 22 Abr | [ ] | - |
+| Mini-Teste 4 (Online) | 22 Abr | [X] | 4/4 |
 | Mini-Teste 5 (TP) | 8 Mai | [ ] | - |
 
 ### 🎓 Teste Final (80% da nota final)
@@ -24,7 +24,7 @@ Programação Imperativa | UM
 
 - [X] Ficha 1
 - [X] Ficha 2
-- [ ] Ficha 3
+- [X] Ficha 3
 - [ ] Ficha 4
 - [ ] Ficha 5
 - [ ] Ficha 6
