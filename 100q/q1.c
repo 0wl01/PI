@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 /*
 1. Defina um programa que lˆe (usando a fun¸c˜ao scanf uma sequˆencia de n´umeros inteiros ter-
@@ -937,23 +938,44 @@ da  ́e triangular superior, i.e., que todos os elementos abaixo da diagonal s �
 */
 
 int triSup (int N, float m [N][N]) {
-    
+    int i, j;
+
+    for (i = 0; i < N; i++)
+        for (j = 0; j < i; j++) {
+            if (fabs(m[i][j]) > 0.00001)
+            return 0;
+        }
+    return 1;
 }
 
 int main() {
-    // A sorted array with several duplicates
-    int testArray[] = {2, 2, 3, 4, 4, 5, 6, 6, 6, 7, 0, -2, 0, 0, 0, 2};
-    int n = sizeof(testArray) / sizeof(testArray[0]);
-    int i;
+    int N = 3;
+    
+    // Matrix 1: Is upper triangular
+    float mat1[3][3] = {
+        {1.0, 2.0, 3.0},
+        {0.0, 5.0, 6.0},
+        {0.0, 0.0, 9.0}
+    };
 
-    printf("Original elements: ");
-    for (i = 0; i < n; i++) printf("%d ", testArray[i]);
-    printf("\n\n");
+    // Matrix 2: Is NOT upper triangular (has a 4.0 below the diagonal)
+    float mat2[3][3] = {
+        {1.0, 2.0, 3.0},
+        {4.0, 5.0, 6.0},
+        {0.0, 0.0, 9.0}
+    };
 
-    // Call our function
-    int position = minInd(testArray, n);
+    if (triSup(N, mat1)) {
+        printf("Matrix 1 is Upper Triangular! ✅\n");
+    } else {
+        printf("Matrix 1 is NOT Upper Triangular! ❌\n");
+    }
 
-    printf("Lowest value on index number: %d\n", position);
+    if (triSup(N, mat2)) {
+        printf("Matrix 2 is Upper Triangular! ✅\n");
+    } else {
+        printf("Matrix 2 is NOT Upper Triangular! ❌\n");
+    }
 
     return 0;
 }
