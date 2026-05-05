@@ -688,6 +688,9 @@ int menosFreq (int v[], int N) {
     int i, res = v[0];
     int Counter = 1;
 
+    if (N <= 0) return 0;
+
+
     for (i = 1; i < N; i++) {
         if (v[i] != v[i-1]) {
             if (Counter < menorFreq) {
@@ -708,21 +711,122 @@ int menosFreq (int v[], int N) {
     return res;
 }
 
+/*
+31. Defina uma funcao int maisFreq (int v[], int N) que recebe um vector v com N elementos
+ ordenado por ordem crescente e retorna o mais frequente dos elementos do vector.
+Se houver mais do que um elemento nessas condicoes deve retornar o que comeca por aparecer
+no ́ındice mais baixo.
+*/
+
+int maisFreq (int v[], int N) {
+    int i;
+    int res = v[0]; 
+    int counter = 1;
+    int record = 1;
+
+    if (N <= 0) return 0;
+
+    for (i = 1; i < N; i++) {
+        if (v[i] == v[i - 1]) {
+            counter++;
+        } else {
+            // Block ended, check if it's the new record
+            if (counter > record) {
+                record = counter;
+                res = v[i - 1];
+            }
+            counter = 1; // Reset for the new block
+        }
+    }
+
+    // Final check for the last block
+    if (counter > record) {
+        res = v[N - 1];
+    }
+    
+    return res;
+}
+
+/*
+32. Defina uma funcao int maxCresc (int v[], int N) que calcula o comprimento da maior
+sequencia crescente de elementos consecutivos num vector v com N elementos. Por exemplo,
+5 se o vector contiver 10 elementos pela seguinte ordem: 1, 2, 3, 2, 1, 4, 10, 12, 5, 4,
+a funcao devera retornar 4, correspondendo ao tamanho da sequencia 1, 4, 10, 12.
+*/
+
+int maxCresc (int v[], int N) {
+    int i, streak = 1;
+    int record = 1;
+
+    if (N <= 0) return 0;
+
+    for (i = 1; i < N; i++) {
+        if (v[i - 1] < v[i]) {
+            streak++;
+        } else {
+            // Sequence broke: check record and ALWAYS reset streak
+            if (streak > record) {
+                record = streak;
+            }
+            streak = 1; 
+        }
+    }
+
+    // Final check for the last streak in the array
+    if (streak > record) {
+        record = streak;
+    }
+
+    return record;
+}
+
+/*
+33. Defina uma funcao int elimRep (int v[], int n) que recebe um vector v com n inteiros e
+elimina as repeticoes. A funcao devera retornar o numero de elementos do vector resultante.
+Por exemplo, se o vector v contiver nas suas primeiras 10 posicoes os numeros {1, 2, 3, 2,
+1, 4, 2, 4, 5, 4}, a invocacao elimRep (v,10) devera retornar 5 e colocar nas primeiras
+5 posicoes do vector os elementos {1,2,3,4,5}.
+*/
+
+int elimRep (int v[], int N) {
+    int read, write = 0;
+    int i, repeat;
+    for (read = 0; read < N; read++) {
+        repeat = 0;
+
+        for (i = 0; i < write; i++) {
+            if (v[read] == v[i]) {
+                repeat = 1;
+                break; // no bother to read the rest
+            }
+        }
+        if (!repeat) {
+            v[write] = v[read];
+            write++;
+        }
+    }
+    return write;
+}
+
 int main() {
-    int meuArray[10] = {10, 20, 30, 40, 50}; 
-    int N;
-    int novoX = 25;
+    // A sorted array with several duplicates
+    int testArray[] = {1, 1, 2, 2, 2, 3, 4, 4, 5, 6, 6, 6, 7};
+    int n = sizeof(testArray) / sizeof(testArray[0]);
+    int i;
 
-    printf("Array antes da inserção: ");
-    for (int i = 0; i < N; i++) printf("%d ", meuArray[i]);
-    printf("\n");
+    printf("Original array size: %d\n", n);
+    printf("Original elements: ");
+    for (i = 0; i < n; i++) printf("%d ", testArray[i]);
+    printf("\n\n");
 
-    // 2. Chamamos a função
-    insere(meuArray, N, novoX);
-    N++; // Agora o array tem N+1 elementos ordenados [cite: 110, 112]
+    // Call our function
+    int newSize = elimRep(testArray, n);
 
-    printf("Array depois de inserir %d: ", novoX);
-    for (int i = 0; i < N; i++) printf("%d ", meuArray[i]);
+    printf("New array size: %d\n", newSize);
+    printf("Cleaned elements: ");
+    for (i = 0; i < newSize; i++) {
+        printf("%d ", testArray[i]);
+    }
     printf("\n");
 
     return 0;
