@@ -791,6 +791,9 @@ Por exemplo, se o vector v contiver nas suas primeiras 10 posicoes os numeros {1
 int elimRep (int v[], int N) {
     int read, write = 0;
     int i, repeat;
+
+    if (N <= 0) return 0;
+
     for (read = 0; read < N; read++) {
         repeat = 0;
 
@@ -808,26 +811,149 @@ int elimRep (int v[], int N) {
     return write;
 }
 
+/*
+34. Defina uma funcao int elimRepOrd (int v[], int n) que recebe um vector v com n inteiros
+ordenado por ordem crescente e elimina as repeticoes. A funcao devera retornar o
+numero de elementos do vector resultante.
+*/
+
+int elimRepOrd (int v[], int N) {
+    int read, write = 0;
+
+    if (N <= 0) return 0;
+
+    for (read = 0; read < N; read++) {
+        if (v[read] != v[write - 1]) {
+            v[write] = v[read];
+            write++;
+        }
+    }
+    return write;
+}
+
+/*
+35. Defina uma funcao int comunsOrd (int a[], int na, int b[], int nb) que calcula quantos
+elementos os vectores a (com na elementos) e b (com nb elementos) tem em comum. 
+Assuma que os vectores a e b estao ordenados por ordem crescente.
+*/
+
+int comunsOrd (int a[], int na, int b[], int nb) {
+    int i = 0, j = 0;
+    int count = 0;
+
+    // We run the loop as long as there are elements to compare in BOTH arrays
+    while (i < na && j < nb) {
+        if (a[i] == b[j]) {
+            count++;
+            i++;
+            j++;
+        } 
+        else if (a[i] < b[j]) {
+            // Value in 'a' is too small, move to the next one
+            i++;
+        } 
+        else {
+            // Value in 'b' is too small, move to the next one
+            j++;
+        }
+    }
+
+    return count;
+}
+
+/*
+36. Defina uma fun ̧c ̃ao int comuns (int a[], int na, int b[], int nb) que calcula quantos
+elementos os vectores a (com na elementos) e b (com nb elementos) tˆem em comum. Assuma
+que os vectores a e b n ̃ao est ̃ao ordenados e defina a fun ̧c ̃ao sem alterar os vectores.
+*/
+
+int comuns (int a[], int na, int b[], int nb) {
+    if (na <= 0 || nb <= 0) return 0;
+
+    int i, j, k;
+    int count = 0;
+    int alreadyCounted;
+
+    for (i = 0; i < na; i++) {
+        // Check if we already processed this value in array 'a' 
+        // to avoid double counting duplicates.
+        alreadyCounted = 0;
+        for (k = 0; k < i; k++) {
+            if (a[i] == a[k]) {
+                alreadyCounted = 1;
+                break; //already counted move to next 'a'
+            }
+        }
+        // if first time being counted = search in b
+        if (!alreadyCounted) {
+            for (j = 0; j < nb; j++) {
+                if (a[i] == b[j]) {
+                    count++;
+                    break; //found a match move to next 'a'
+                }
+            }
+        }
+    }
+    return count;
+}
+
+/*
+37. Defina uma fun ̧c ̃ao int minInd (int v[], int n) que, dado um vector v com n inteiros,
+retorna o  ́ındice do menor elemento do vector.
+*/
+
+int minInd (int v[], int n) {
+    if (n <= 0) return 0;
+
+    int i;
+    int index = 0;
+
+    for (i = 1; i < n; i++) {
+        if (v[i] < v[index]) {
+            index = i;
+        }
+    }
+    return index;
+}
+
+/*
+38. Defina uma fun ̧c ̃ao void somasAc (int v[], int Ac [], int N) que preenche o vector Ac
+com as somas acumuladas do vector v. Por exemplo, na posi ̧c ̃ao Ac[3] deve ser calculado
+como v[0]+v[1]+v[2]+v[3].
+*/
+
+void somasAc (int v[], int Ac [], int N) {
+    int i, soma = 0;
+
+    for (i = 0; i < N; i++) {
+        soma += v[i];
+        Ac[i] = soma;
+    }
+}
+
+/*
+39. Defina uma fun ̧c ̃ao int triSup (int N, float m [N][N]) que testa se uma matriz quadra-
+da  ́e triangular superior, i.e., que todos os elementos abaixo da diagonal s ̃ao zeros
+*/
+
+int triSup (int N, float m [N][N]) {
+    
+}
+
 int main() {
     // A sorted array with several duplicates
-    int testArray[] = {1, 1, 2, 2, 2, 3, 4, 4, 5, 6, 6, 6, 7};
+    int testArray[] = {2, 2, 3, 4, 4, 5, 6, 6, 6, 7, 0, -2, 0, 0, 0, 2};
     int n = sizeof(testArray) / sizeof(testArray[0]);
     int i;
 
-    printf("Original array size: %d\n", n);
     printf("Original elements: ");
     for (i = 0; i < n; i++) printf("%d ", testArray[i]);
     printf("\n\n");
 
     // Call our function
-    int newSize = elimRep(testArray, n);
+    int position = minInd(testArray, n);
 
-    printf("New array size: %d\n", newSize);
-    printf("Cleaned elements: ");
-    for (i = 0; i < newSize; i++) {
-        printf("%d ", testArray[i]);
-    }
-    printf("\n");
+    printf("Lowest value on index number: %d\n", position);
 
     return 0;
 }
