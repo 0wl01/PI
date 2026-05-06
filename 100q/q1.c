@@ -1235,7 +1235,7 @@ int maisCentral (Posicao pos[], int N) {
 }
 
 /*
-Defina a fun ̧c ̃ao int vizinhos (Posicao p, Posicao pos[], int N) que, dada uma posi ̧c ̃ao
+50. Defina a fun ̧c ̃ao int vizinhos (Posicao p, Posicao pos[], int N) que, dada uma posi ̧c ̃ao
 e um array com N posi ̧c ̃oes, calcula quantas dessas posi ̧c ̃oes s ̃ao adjacentes `a posi ̧c ̃ao dada.
 */
 
