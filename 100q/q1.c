@@ -981,42 +981,347 @@ void addTo (int N, int M, int a [N][M], int b[N][M]) {
     }
 }
 
+/*
+42. Uma forma de representar conjuntos de  ́ındices consiste em usar um array de inteiros contendo
+1 ou 0 consoante esse  ́ındice perten ̧ca ou n ̃ao ao conjunto. Assim o conjunto {1,4,7}seria
+representado por um array em que as primeiras 8 posi ̧c ̃oes conteriam {0,1,0,0,1,0,0,1}.
+Apresente uma defini ̧c ̃ao da fun ̧c ̃ao int unionSet (int N, int v1[N], int v2[N], int
+r[N]) que coloca no array r o resultado da uni ̃ao dos conjuntos v1 e v2.
+*/
+
+int unionSet (int N, int v1[N], int v2[N], int r[N]) {
+    int i, counter = 0;
+    
+    // Limpeza do array
+    for (i = 0; i < N; i++) {
+        r[i] = 0;
+    }
+
+    for (i = 0; i < N; i++) {
+        if (r[v1[i]] != 1) {
+            r[v1[i]] = 1;
+            counter++;
+        }
+    }
+
+    for (i = 0; i < N; i++) {
+        if (r[v2[i]] != 1) {
+            r[v2[i]] = 1;
+            counter++;
+        }
+    }
+    return counter;
+}
+
+/*
+43. Uma forma de representar conjuntos de  ́ındices consiste em usar um array de inteiros contendo
+1 ou 0 consoante esse  ́ındice perten ̧ca ou n ̃ao ao conjunto. Assim o conjunto {1,4,7}seria
+representado por um array em que as primeiras 8 posi ̧c ̃oes conteriam {0,1,0,0,1,0,0,1}.
+Apresente uma defini ̧c ̃ao da fun ̧c ̃ao int intersectSet (int N, int v1[N], int v2[N],
+int r[N]) que coloca no array r o resultado da intersec ̧c ̃ao dos conjuntos v1 e v2.
+*/
+
+int intersectSet (int N, int v1[N], int v2[N], int r[N]) {
+    int i, counter = 0;
+    int temp[N];
+    
+    for (i = 0; i < N; i++) {
+        temp[i] = 0;
+        r[i] = 0;
+    }
+
+    for (i = 0; i < N; i++) {
+        if (temp[v1[i]] != 1) {
+            temp[v1[i]] = 1;
+        }
+    }
+
+    for (i = 0; i < N; i++) {
+        if (temp[v2[i]] == 1 && r[v2[i]] != 1) {
+            r[v2[i]] = 1;
+            counter++;
+        }
+    }
+    return counter;
+}
+
+/*
+44. Uma forma de representar multi-conjuntos de  ́ındices consiste em usar um array de inteiros
+contendo em cada posi ̧c ̃ao o n ́umero de ocorrˆencias desse  ́ındice. Assim o multi-conjunto
+{1,1,4,7,7,7}seria representado por um array em que as primeiras 8 posi ̧c ̃oes conteriam
+{0,2,0,0,1,0,0,3}.
+Apresente uma defini ̧c ̃ao da fun ̧c ̃ao int intersectMSet (int N, int v1[N], int v2[N],
+int r[N]) que coloca no array r o resultado da intersec ̧c ̃ao dos multi-conjuntos v1 e v2.
+*/
+
+int intersectMSet (int N, int v1[N], int v2[N], int r[N]) {
+    int i, counter = 0;
+    int temp[N];
+
+    for (i = 0; i < N; i++) {
+        r[i] = 0;
+        temp[i] = 0;
+    }
+
+    for (i = 0; i < N; i++) {
+        temp[v1[i]] += 1;
+    }
+
+    for (i = 0; i < N; i++) {
+        r[v2[i]] += 1;
+    }
+
+    for (i = 0; i < N; i++) {
+        if (r[i] != 0 && temp[i] != 0) {
+        r[i] = 1;
+        counter++;
+        } else {
+            r[i] = 0;
+        }
+    }
+    return counter;
+}
+
+/*
+45. Uma forma de representar multi-conjuntos de  ́ındices consiste em usar um array de inteiros
+contendo em cada posi ̧c ̃ao o n ́umero de ocorrˆencias desse  ́ındice. Assim o multi-conjunto
+{1,1,4,7,7,7}seria representado por um array em que as primeiras 8 posi ̧c ̃oes conteriam
+{0,2,0,0,1,0,0,3}.
+Apresente uma defini ̧c ̃ao da fun ̧c ̃ao int unionMSet (int N, int v1[N], int v2[N], int
+r[N]) que coloca no array r o resultado da uni ̃ao dos multi-conjuntos v1 e v2.
+*/
+
+int unionMSet (int N, int v1[N], int v2[N], int r[N]) {
+    int i, counter = 0;
+
+    for (i = 0; i < N; i++) {
+        r[i] = 0;
+    }
+
+    for (i = 0; i < N; i++) {
+        r[v1[i]] += 1;
+        counter ++;
+    }
+
+    for (i = 0; i < N; i++) {
+        r[v2[i]] += 1;
+        counter++;
+    }
+    return counter;
+}
+
+/*
+46. Uma forma de representar multi-conjuntos de  ́ındices consiste em usar um array de inteiros
+contendo em cada posi ̧c ̃ao o n ́umero de ocorrˆencias desse  ́ındice. Assim o multi-conjunto
+{1,1,4,7,7,7}seria representado por um array em que as primeiras 8 posi ̧c ̃oes conteriam
+{0,2,0,0,1,0,0,3}.
+Apresente uma defini ̧c ̃ao da fun ̧c ̃ao int cardinalMSet (int N, int v[N]) que calcula a
+n ́umero de elementos do multi-conjunto v.
+*/
+
+int cardinalMSet (int N, int v[N]) {
+    int i, counter = 0;
+
+    for (i = 0; i < N; i++) {
+        counter += v[i];
+    }
+    return counter;
+}
+
+// 47. Considere as seguintes defini ̧c ̃oes para representar as posi ̧c ̃oes e movimentos de um robot.
+typedef enum movimento {Norte, Oeste, Sul, Este}
+                Movimento;
+
+typedef struct posicao {
+                int x, y;
+                }Posicao;
+
+/*
+Defina a fun ̧c ̃ao Posicao posFinal (Posicao inicial, Movimento mov[], int N) que,
+dada uma posi ̧c ̃ao inicial e um array com N movimentos, calcula a posi ̧c ̃ao final do robot
+8
+depois de efectuar essa sequˆencia de movimentos.
+*/
+
+Posicao posFinal (Posicao inicial, Movimento mov[], int N) {
+    int i;
+    Posicao atual = inicial;
+
+    for (i = 0; i < N; i++) {
+        switch (mov [i]) {
+            case Norte:
+                atual.y++;
+                break;
+            case Sul:
+                atual.y--;
+                break;
+            case Este:
+                atual.x++;
+                break;
+            case Oeste:
+                atual.x--;
+                break;
+        }
+    }
+    return atual;
+}
+
+/*
+48. Defina a fun ̧c ̃ao int caminho (Posicao inicial, Posicao final, Movimento mov[], int N)
+que, dadas as posi ̧c ̃oes inicial e final do robot, preenche o array com os movimentos sufi-
+cientes para que o robot passe de uma posi ̧c ̃ao para a outra.
+A fun ̧c ̃ao dever ́a preencher no m ́aximo N elementos do array e retornar o n ́umero de elementos
+preenchidos. Se n ̃ao for poss ́ıvel atingir a posi ̧c ̃ao final com N movimentos, a fun ̧c ̃ao dever ́a
+retornar um n ́umero negativo.
+*/
+
+// Função Auxiliar para Calcular Distância
+
+int distancia (Posicao inicial, Posicao final) {
+    int deltax = (abs(final.x - inicial.x));
+    int deltay = (abs(final.y - inicial.y));
+
+    return deltax + deltay;
+}
+
+int caminho (Posicao inicial, Posicao final, Movimento mov[], int N) {
+    int i = 0;
+    Posicao atual = inicial;
+
+    if (N < distancia(inicial, final)) return -1;
+
+    while (atual.x != final.x && i < N) {
+        if (atual.x < final.x) {
+                mov[i++] = Este;
+                atual.x++;
+        } else {
+            mov[i++] = Oeste;
+            atual.x--;
+        }
+    }
+
+    while (atual.y != final.y && i < N) {
+        if (atual.y < final.y) {
+            mov[i++] = Norte;
+            atual.y++;
+        } else {
+            mov[i++] = Sul;
+            atual.y--;
+        }
+    }
+    return i;
+}
+
+/*
+49. Defina a fun ̧c ̃ao int maisCentral (Posicao pos[], int N) que, dado um array com N
+posi ̧c ̃oes, determina o  ́ındice da posi ̧c ̃ao que est ́a mais perto da origem (note que as coor-
+denadas de cada ponto s ̃ao n ́umeros inteiros).
+*/
+
+int maisCentral (Posicao pos[], int N) {
+    int i, index = 0;
+
+    Posicao origem = {0, 0};
+
+    int record = distancia(pos[0], origem);
+
+    for (i = 1; i < N; i++) {
+        if (distancia(pos[i], origem) < record) {
+            index = i;
+            record = distancia(pos[i], origem);
+        }
+    }
+    return index;
+}
+
+/*
+Defina a fun ̧c ̃ao int vizinhos (Posicao p, Posicao pos[], int N) que, dada uma posi ̧c ̃ao
+e um array com N posi ̧c ̃oes, calcula quantas dessas posi ̧c ̃oes s ̃ao adjacentes `a posi ̧c ̃ao dada.
+*/
+
+int vizinhos(Posicao p, Posicao pos[], int N) {
+    int i, cont = 0;
+    for (i = 0; i < N; i++) {
+        // Se a distância for 1, são adjacentes
+        if (distancia(p, pos[i]) == 1) {
+            cont++;
+        }
+    }
+    return cont;
+}
+
+// Função auxiliar para imprimir arrays de inteiros
+void printArray(int N, int v[]) {
+    printf("{");
+    for (int i = 0; i < N; i++) {
+        printf("%d%s", v[i], (i == N - 1) ? "" : ", ");
+    }
+    printf("}\n");
+}
+
 int main() {
-    int N = 3;
-    int n = 3, m = 3;
+    int N = 10;
+
+    // --- TESTE QUESTÃO 43 (IntersectSet) ---
+    printf("--- Questão 43: IntersectSet ---\n");
+    int s1[10] = {0, 1, 0, 0, 1, 0, 0, 1, 0, 0}; // {1, 4, 7}
+    int s2[10] = {0, 1, 1, 0, 0, 0, 0, 1, 0, 0}; // {1, 2, 7}
+    int res[10];
     
-    int matA[3][3] = {
-        {1, 2, 3},
-        {4, 5, 6},
-        {7, 8, 9}
-    };
-    
-    int matB[3][3] = {
-        {10, 20, 30},
-        {40, 50, 60},
-        {70, 80, 90}
-    };
+    printf("S1: "); printArray(N, s1);
+    printf("S2: "); printArray(N, s2);
+    int c43 = intersectSet(N, s1, s2, res);
+    printf("Interseção: "); printArray(N, res);
+    printf("Cardinalidade: %d\n\n", c43);
 
-    printf("Matriz A:\n");
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < m; j++) printf("%d ", matA[i][j]);
-        printf("\n");
+    // --- TESTE QUESTÃO 44/45 (Multiconjuntos) ---
+    printf("--- Questão 44/45: MSets ---\n");
+    int ms1[10] = {0, 2, 0, 0, 1, 0, 0, 3, 0, 0}; // {1,1,4,7,7,7}
+    int ms2[10] = {0, 1, 0, 0, 2, 0, 0, 1, 0, 0}; // {1,4,4,7}
+    int resM[10];
+
+    printf("MS1: "); printArray(N, ms1);
+    printf("MS2: "); printArray(N, ms2);
+    intersectMSet(N, ms1, ms2, resM);
+    printf("Interseção MSet: "); printArray(N, resM);
+    printf("Cardinalidade (Q46): %d\n\n", cardinalMSet(N, resM));
+
+    // --- TESTE QUESTÃO 47 (posFinal) ---
+    printf("--- Questão 47: posFinal ---\n");
+    Posicao p_ini = {0, 0};
+    Movimento movs[4] = {Norte, Este, Norte, Oeste};
+    printf("Posição Inicial: (%d, %d)\n", p_ini.x, p_ini.y);
+    Posicao pf = posFinal(p_ini, movs, 4);
+    printf("Posição Final após 4 movimentos: (%d, %d)\n\n", pf.x, pf.y);
+
+    // --- TESTE QUESTÃO 48 (caminho) ---
+    printf("--- Questão 48: caminho ---\n");
+    Posicao p_alvo = {2, -1};
+    Movimento rota[10];
+    printf("Ir de (0,0) para (%d, %d)\n", p_alvo.x, p_alvo.y);
+    int passos = caminho(p_ini, p_alvo, rota, 10);
+    if (passos >= 0) {
+        printf("Caminho encontrado (%d passos): ", passos);
+        // Aqui podias fazer um loop para imprimir os enums se quisesses
+        printf("OK!\n\n");
+    } else {
+        printf("Caminho impossível!\n\n");
     }
 
-    printf("Matriz B:\n");
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < m; j++) printf("%d ", matB[i][j]);
-        printf("\n");
-    }
+    // --- TESTE QUESTÃO 49 (maisCentral) ---
+    printf("--- Questão 49: maisCentral ---\n");
+    Posicao lista[3] = {{5, 5}, {1, 1}, {10, 0}};
+    printf("Lista de posições: {(5,5), (1,1), (10,0)}\n");
+    int central = maisCentral(lista, 3);
+    printf("O índice da posição mais central é: %d (Posição: %d,%d)\n", 
+            central, lista[central].x, lista[central].y);
 
-    // Chama a função de soma
-    addTo(n, m, matA, matB);
-
-    printf("\nMatriz A + B:\n");
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < m; j++) printf("%d ", matA[i][j]);
-        printf("\n");
-    }
+    // --- Teste da Questão 50 (Vizinhos) ---
+    printf("--- Teste Questão 50 (Vizinhos) ---\n");
+    Posicao p_foco = {1, 1};
+    Posicao possiveis_vizinhos[] = {{1,2}, {2,1}, {5,5}, {1,0}, {0,1}};
+    int v = vizinhos(p_foco, possiveis_vizinhos, 5);
+    printf("A posição (1,1) tem %d vizinhos adjacentes no array.\n", v);
 
     return 0;
 }
