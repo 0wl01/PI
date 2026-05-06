@@ -948,33 +948,74 @@ int triSup (int N, float m [N][N]) {
     return 1;
 }
 
+/*
+40. Defina uma fun ̧c ̃ao void transposta (int N, float m [N][N]) que transforma uma ma-
+triz na sua transposta.
+*/
+
+void transposta (int N, float m [N][N]) {
+    int i, j;
+    float temp;
+
+    for (i = 0; i < N; i++) {
+        for (j = i + 1; j < N; j++) {
+            temp = m[i][j];
+            m[i][j] = m[j][i];
+            m[j][i] = temp;
+        }
+    }
+}
+
+/*
+41. Defina uma fun ̧c ̃ao void addTo (int N, int M, int a [N][M], int b[N][M]) que adi-
+ciona a segunda matriz `a primeira.
+*/
+
+void addTo (int N, int M, int a [N][M], int b[N][M]) {
+    int i, j;
+
+    for (i = 0; i < N; i++) {
+        for (j = 0; j < M; j++) {
+            a[i][j] += b[i][j];
+        }
+    }
+}
+
 int main() {
     int N = 3;
+    int n = 3, m = 3;
     
-    // Matrix 1: Is upper triangular
-    float mat1[3][3] = {
-        {1.0, 2.0, 3.0},
-        {0.0, 5.0, 6.0},
-        {0.0, 0.0, 9.0}
+    int matA[3][3] = {
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    };
+    
+    int matB[3][3] = {
+        {10, 20, 30},
+        {40, 50, 60},
+        {70, 80, 90}
     };
 
-    // Matrix 2: Is NOT upper triangular (has a 4.0 below the diagonal)
-    float mat2[3][3] = {
-        {1.0, 2.0, 3.0},
-        {4.0, 5.0, 6.0},
-        {0.0, 0.0, 9.0}
-    };
-
-    if (triSup(N, mat1)) {
-        printf("Matrix 1 is Upper Triangular! ✅\n");
-    } else {
-        printf("Matrix 1 is NOT Upper Triangular! ❌\n");
+    printf("Matriz A:\n");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) printf("%d ", matA[i][j]);
+        printf("\n");
     }
 
-    if (triSup(N, mat2)) {
-        printf("Matrix 2 is Upper Triangular! ✅\n");
-    } else {
-        printf("Matrix 2 is NOT Upper Triangular! ❌\n");
+    printf("Matriz B:\n");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) printf("%d ", matB[i][j]);
+        printf("\n");
+    }
+
+    // Chama a função de soma
+    addTo(n, m, matA, matB);
+
+    printf("\nMatriz A + B:\n");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) printf("%d ", matA[i][j]);
+        printf("\n");
     }
 
     return 0;
