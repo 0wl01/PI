@@ -317,17 +317,103 @@ ocorrˆencia) o maior elemento de uma lista n ̃ao vazia, retornando o valor des
 */
 
 int removeMaiorL (LInt *l) {
-     LInt atual = *l;
+    LInt atual = *l;
+    LInt anterior = NULL;
+    LInt maior_node = atual;
+    LInt pre_maior = NULL;
+    int record = atual->valor;
 
-     if (atual == NULL) return 0;
+    while (atual != NULL) {
+        if (atual->valor > record) {
+            record = atual->valor;
+            maior_node = atual;
+            pre_maior = anterior; // Guardamos exatamente quem vinha atrás do recorde!
+        }
+        // Avançamos ambos os ponteiros passo a passo
+        anterior = atual;
+        atual = atual->prox;
+    }
 
-     int record = *l;
-     atual = atual->prox;
+    // Desligar o maior nó da corrente
+    if (pre_maior == NULL) {
+        // Se o pre_maior continuar a NULL, significa que o maior era logo o 1º elemento!
+        *l = maior_node->prox;
+    } else {
+        // Caso contrário, o nó anterior "salta" o maior_node
+        pre_maior->prox = maior_node->prox;
+    }
 
-     while(atual != NULL) {
-        int removeMaiorL (LInt *)
-     }
+    // Limpar a memória e devolver o valor
+    free(maior_node);
+    return record;
+}
 
+/*
+13. Apresente uma defini ̧c ̃ao n ̃ao recursiva da fun ̧c ̃ao void init (LInt *) que remove o  ́ultimo
+elemento de uma lista n ̃ao vazia (libertando o correspondente espa ̧co).
+*/
+
+void removeUltimo (LInt *l) {
+    if (*l == NULL) return; 
+
+    LInt atual = *l;
+    LInt anterior = NULL;
+
+    // Paramos quando o *próximo* for NULL (estamos no último nó!)
+    while (atual->prox != NULL) {
+        anterior = atual;
+        atual = atual->prox;
+    }
+
+    // Desligar a cauda
+    if (anterior == NULL) {
+        // Só havia 1 elemento na lista. A lista passa a vazia.
+        *l = NULL;
+    } else {
+        // O penúltimo elemento passa a ser o novo último
+        anterior->prox = NULL;
+    }
+
+    // 3. Libertar a memória do último nó
+    free(atual);
+}
+
+/*
+14. Apresente uma defini ̧c ̃ao n ̃ao recursiva da fun ̧c ̃ao void appendL (LInt *, int) que acres-
+centa um elemento no fim da lista.
+*/
+
+void appendL (LInt *l, int x) {
+    // Criar e alocar o novo nó
+    LInt novo = malloc(sizeof(struct lligada));
+    novo->valor = x;
+    novo->prox = NULL;
+
+    // Se a lista estiver vazia, o novo nó é a cabeça
+    if (*l == NULL) {
+        *l = novo;
+    } else {
+        // Caso contrário, percorrer até ao último
+        LInt atual = *l;
+        while (atual->prox != NULL) {
+            atual = atual->prox;
+        }
+        atual->prox = novo;
+    }
+}
+
+/*
+15. Apresente uma defini ̧c ̃ao da fun ̧c ̃ao void concatL (LInt *a, LInt b) que acrescenta a lista
+b `a lista *a
+*/
+
+void concatL (LInt *a, LInt b) {
+    LInt cu = b;
+    LInt pixa = *a;
+
+    while (pixa->prox != NULL) {
+        pixa = pixa->prox;
+    }
 }
 
 // Auxiliar para criar nodo novo
@@ -339,28 +425,23 @@ LInt novoNo(int v, LInt proximo) {
 }
 
 int main() {
-    // 1. Criar as duas listas ordenadas
-    LInt a = novoNo(10, novoNo(30, novoNo(50, NULL)));
-    LInt b = novoNo(20, novoNo(40, NULL));
-    
-    LInt resultado = NULL;
+    LInt lista = NULL;
 
-    printf("Lista A:\n");
-    imprimeL(a);
-    
-    printf("\nLista B:\n");
-    imprimeL(b);
+    printf("--- Teste Questao 14 (Append) ---\n");
+    appendL(&lista, 10);
+    appendL(&lista, 50);
+    appendL(&lista, 20);
+    appendL(&lista, 30);
+    imprimeL(lista); // Esperado: 10 -> 50 -> 20 -> 30 -> NULL
 
-    // 2. Executar o Merge
-    printf("\nA fazer o merge...\n");
-    merge(&resultado, a, b);
+    printf("\n--- Teste Questao 12 (Remove Maior) ---\n");
+    int maior = removeMaiorL(&lista);
+    printf("Maior removido: %d\n", maior);
+    imprimeL(lista); // Esperado: 10 -> 20 -> 30 -> NULL
 
-    // 3. Mostrar o resultado final
-    printf("\nLista Final (Merge):\n");
-    imprimeL(resultado);
-
-    // Nota: Como o merge não cria nós novos, basta limpar a lista 'resultado'
-    freeL(resultado);
+    printf("\n--- Teste Questao 13 (Remove Ultimo) ---\n");
+    removeUltimo(&lista);
+    imprimeL(lista); // Esperado: 10 -> 20 -> NULL
 
     return 0;
 }
