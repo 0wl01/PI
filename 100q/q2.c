@@ -409,11 +409,175 @@ b `a lista *a
 
 void concatL (LInt *a, LInt b) {
     LInt cu = b;
-    LInt pixa = *a;
+    // se nao houver pixa o cu fode-se sozinho
+    if (*a == NULL) {
+        *a = cu;
+    } else {
+        LInt pixa = *a;
 
+    // encontrar a ponta da pixa
     while (pixa->prox != NULL) {
         pixa = pixa->prox;
+        }
+    // e por no cu
+    pixa->prox = cu;
     }
+}
+
+/*
+16. Apresente uma defini ̧c ̃ao da fun ̧c ̃ao LInt cloneL (LInt) que cria uma nova lista ligada com
+os elementos pela ordem em que aparecem na lista argumento.
+*/
+
+LInt cloneL (LInt l) {
+    if (l == NULL) return NULL;
+
+    // Criar o primeiro nó (a cabeça da nossa nova lista)
+    LInt clone_head = malloc(sizeof(struct lligada));
+    clone_head->valor = l->valor; // Copiamos apenas o NÚMERO!
+    clone_head->prox = NULL;
+
+    // Apontadores de trabalho
+    LInt atual = l->prox;    // Vai percorrer o resto da original (a partir do 2º)
+    LInt cauda = clone_head; // Fica na ponta do clone para irmos colando
+
+    // 2. Percorrer o resto da lista original
+    while (atual != NULL) {
+        // Criar uma casa nova
+        LInt novo = malloc(sizeof(struct lligada));
+        novo->valor = atual->valor; // Copiar o número
+        novo->prox = NULL;
+
+        // Colar a casa nova na ponta da nossa lista clonada
+        cauda->prox = novo;
+        
+        // A cauda avança para a nova ponta
+        cauda = novo;
+
+        // Avançar na lista original
+        atual = atual->prox;
+    }
+
+    return clone_head;
+}
+
+/*
+17. Apresente uma defini ̧c ̃ao n ̃ao recursiva da fun ̧c ̃ao LInt cloneRev (LInt) que cria uma nova
+lista ligada com os elementos por ordem inversa.
+Por exemplo, se a lista l tiver 5 elementos com os valores [1,2,3,4,5] por esta ordem, a
+invoca ̧c ̃ao cloneRev(l) deve corresponder a uma nova lista com os elementos [5,4,3,2,1]
+por esta ordem
+*/
+
+LInt cloneRev (LInt l) {
+    LInt atual = l;
+    LInt nova_cabeca = NULL; // A lista invertida começa vazia
+
+    // Percorremos a lista original normalmente, do início para o fim
+    while (atual != NULL) {
+        LInt novo = malloc(sizeof(struct lligada));
+        novo->valor = atual->valor;
+
+        novo->prox = nova_cabeca;
+        nova_cabeca = novo;
+
+        atual = atual->prox;
+    }
+
+    return nova_cabeca;
+}
+
+/*
+18. Defina uma fun ̧c ̃ao int maximo (LInt l) que calcula qual o maior valor armazenado numa
+lista n ̃ao vazia.
+*/
+
+int maximo (LInt l) {
+    LInt atual = l;
+    int record = atual->valor;
+
+    atual = atual->prox;
+
+    while (atual != NULL) {
+        if (atual->valor > record) {
+            record = atual->valor;
+        }
+
+        atual = atual->prox;
+    }
+    return record;
+}
+
+/*
+19. Apresente uma defini ̧c ̃ao iterativa da fun ̧c ̃ao int take (int n, LInt *l) que, dado um in-
+teiro n e uma lista ligada de inteiros l, apaga de l todos os nodos para al ́em do n- ́esimo
+(libertando o respectivo espa ̧co). Se a lista tiver n ou menos nodos, a fun ̧c ̃ao n ̃ao altera a
+lista.
+A fun ̧c ̃ao deve retornar o comprimento final da lista.
+*/
+
+int take (int n, LInt *l) {
+    int cont = 0;
+    LInt atual = *l;
+    LInt anterior = NULL;
+
+    // Percorrer até contar 'n' elementos ou a lista acabar
+    while (atual != NULL && cont < n) {
+        anterior = atual;
+        atual = atual->prox;
+        cont++;
+    }
+
+    // O TRAVÃO DE OURO: se a lista tem n ou menos nós, não se altera nada!
+    if (atual == NULL) {
+        return cont;
+    }
+
+    // Se chegámos aqui, é porque atual != NULL (a lista tem MAIS de n nós)
+    if (anterior == NULL) {
+        // Caso n <= 0: apagar a lista toda desde a cabeça
+        while (atual != NULL) {
+            LInt temp = atual;
+            atual = atual->prox;
+            free(temp);
+        }
+        *l = NULL;
+    } else {
+        // Caso normal: cortar a ligação no n-ésimo nó
+        anterior->prox = NULL;
+
+        // Limpar o resto do lixo que ficou para a frente
+        while (atual != NULL) {
+            LInt temp = atual;
+            atual = atual->prox;
+            free(temp);
+        }
+    }
+
+    return cont;
+}
+
+/*
+20. Apresente uma defini ̧c ̃ao iterativa da fun ̧c ̃ao int drop (int n, LInt *l) que, dado um in-
+teiro n e uma lista ligada de inteiros l, apaga de l os n primeiros elementos da lista (libertando
+o respectivo espa ̧co). Se a lista tiver n ou menos nodos, a fun ̧c ̃ao liberta a totalidade da lista.
+A fun ̧c ̃ao deve retornar o n ́umero de elementos removidos.
+*/
+
+int drop (int n, LInt *l) {
+    int del = 0;
+    LInt atual = *l;
+
+    while (atual != NULL && del < n) {
+        LInt temp = atual;
+        atual = atual->prox;
+        free (temp);
+        del++;
+    }
+
+    *l = atual;
+
+    return del;
 }
 
 // Auxiliar para criar nodo novo
