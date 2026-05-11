@@ -211,6 +211,125 @@ void splitQS (LInt l, int x, LInt *mx, LInt *Mx) {
     if (ult_M != NULL) ult_M->prox = NULL;
 }
 
+/*
+9. Defina uma fun ̧c ̃ao LLig parteAmeio (LLig *l) que, parte uma lista n ̃ao vazia *l a meio.
+Se x contiver os elementos 1,2,3,4,5, ap ́os a invoca ̧c ̃ao y=parteAmeio(&x) a lista y dever ́a
+conter os elementos 1,2 e a lista x os restantes 3,4,5
+*/
+
+LInt parteAmeio (LInt *l) {
+    int i, total = 0;
+
+    LInt temp = *l;
+    while (temp) {
+        total++;
+        temp = temp->prox;
+    }
+
+    int meio = total / 2;
+
+    if (meio == 0) return NULL; // x <= 1 elemento, nao corta nada
+
+    //Correr atual ate ao meio da lista
+    LInt atual = *l;
+    for (i = 0; i < meio - 1; i++) {
+        atual = atual->prox;
+    }
+
+    //Agora atual esta a meio da lista e podemos cortar
+    LInt y = *l; //y começa a 0
+    *l = atual->prox; // x começa a meio
+    atual->prox = NULL; //cortamos a cauda de y
+
+    return y;
+}
+
+/*
+10. Apresente uma defini ̧c ̃ao n ̃ao recursiva da fun ̧c ̃ao int removeAll (LInt *, int) que remove
+todas as ocorrˆencias de um dado inteiro de uma lista, retornando o n ́umero de c ́elulas removi-
+das.
+*/
+
+int removeAll (LInt *l, int n) {
+    int counter = 0;
+    LInt atual = *l;
+    LInt prev = NULL;
+
+    while (atual != NULL) {
+        if (atual->valor == n) { // Se for para remover
+            counter++;
+            LInt temp = atual;
+            
+            if (prev == NULL) {
+                // Caso seja o primeiro nó, movemos o início da lista
+                *l = atual->prox;
+                atual = *l;
+            } else {
+                // Caso contrário, o anterior "salta" o atual
+                prev->prox = atual->prox;
+                atual = prev->prox;
+            }
+            free(temp);
+        } else {
+            // Se não for para remover, apenas avançamos ambos
+            prev = atual;
+            atual = atual->prox;
+        }
+    }
+    return counter;
+}
+
+/*
+11. Apresente uma defini ̧c ̃ao da fun ̧c ̃ao int removeDups (LInt *) que remove os valores repeti-
+dos de uma lista (deixando apenas a primeira ocorrˆencia).
+*/
+
+int removeDups (LInt *l) {
+    LInt atual = *l;
+    int removidos = 0;
+
+    while (atual != NULL) {
+        LInt insider_atual = atual->prox;
+        LInt insider_anterior = atual;
+
+        while (insider_atual != NULL) {
+            if (insider_atual->valor == atual->valor ) {
+                // duplicado encontrado
+                removidos++;
+                insider_anterior->prox = insider_atual->prox;
+                LInt temp = insider_atual;
+                insider_atual = insider_atual->prox;
+                free (temp);
+            } else {
+                insider_anterior = insider_atual;
+                insider_atual = insider_atual->prox;
+            }
+        }
+        // Depois de percorrer a lista ligada por x vamos a procura de outro
+        atual = atual->prox;
+    }
+    return removidos;
+}
+
+/*
+12. Apresente uma defini ̧c ̃ao da fun ̧c ̃ao int removeMaiorL (LInt *) que remove (a primeira
+ocorrˆencia) o maior elemento de uma lista n ̃ao vazia, retornando o valor desse elemento.
+*/
+
+int removeMaiorL (LInt *l) {
+     LInt atual = *l;
+
+     if (atual == NULL) return 0;
+
+     int record = *l;
+     atual = atual->prox;
+
+     while(atual != NULL) {
+        int removeMaiorL (LInt *)
+     }
+
+}
+
 // Auxiliar para criar nodo novo
 LInt novoNo(int v, LInt proximo) {
     LInt n = malloc(sizeof(struct lligada));

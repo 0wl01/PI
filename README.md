@@ -9,13 +9,13 @@ Programação Imperativa | UM
 
 ### 📝 Mini-Testes (20% da nota final)
 
-| Momento | Data | Estado | Nota |
-| :--- | :--- | :---: | :--- |
-| Mini-Teste 1 (Online) | 04 Mar | [X] | 4/4 |
-| Mini-Teste 2 (TP) | 27 Mar | [X] | 4/4 |
-| Mini-Teste 3 (Online) | 7 Abr | [X] | 4/4 |
-| Mini-Teste 4 (Online) | 22 Abr | [X] | 4/4 |
-| Mini-Teste 5 (TP) | 8 Mai | [ ] | - |
+| Momento               | Data   | Estado | Nota |
+| :---                  | :---   | :---:  | :--- |
+| Mini-Teste 1 (Online) | 04 Mar | [X]    | 4/4 |
+| Mini-Teste 2 (TP)     | 27 Mar | [X]    | 4/4 |
+| Mini-Teste 3 (Online) | 7 Abr  | [X]    | 4/4 |
+| Mini-Teste 4 (Online) | 22 Abr | [X]    | 4/4 |
+| Mini-Teste 5 (TP)     | 8 Mai  | [ ]    | - |
 
 ### 🎓 Teste Final (80% da nota final)
 
@@ -47,8 +47,8 @@ Programação Imperativa | UM
 ## 100 Questões
 
 - [X] Parte 1 - 100% *(50/50)*
-- [ ] Parte 2 - 0% *(0/50)*
+- [ ] Parte 2 - 40% *(20/50)*
 
-![Progress](https://geps.dev/progress/50)
+![Progress](https://geps.dev/progress/70)
 
 </details>
