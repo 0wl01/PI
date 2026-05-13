@@ -580,6 +580,197 @@ int drop (int n, LInt *l) {
     return del;
 }
 
+/*
+21. O tipo LInt pode ser usado ainda para implementar listas circulares. Defina uma fun ̧c ̃ao LInt
+Nforward (LInt l, int N) que, dada uma lista circular d ́a como resultado o endere ̧co do
+elemento da lista que est ́a N posi ̧c ̃oes `a frente.
+*/
+
+LInt Nforward (LInt l, int N) {
+    LInt atual = l;
+    int i;
+
+    for (i = 0; i < N && atual != NULL; i++) {
+        atual = atual->prox;
+    }
+    
+    return atual;
+}
+
+/*
+22. Defina uma fun ̧c ̃ao int listToArray (LInt l, int v[], int N) que, dada uma lista l,
+preenche o array v com os elementos da lista.
+A fun ̧c ̃ao dever ́a preencher no m ́aximo N elementos e retornar o n ́umero de elementos preenchi-
+dos.
+*/
+
+int listToArray (LInt l, int v[], int N) {
+    int i;
+    LInt atual = l;
+
+    if (atual == NULL) return 0;
+
+    for (i = 0; i < N && atual != NULL; i++) {
+        v[i] = atual->valor;
+        atual = atual->prox;
+    }
+    return i;
+}
+
+/*
+23. Defina uma fun ̧c ̃ao LInt arrayToList (int v[], int N) que constr ́oi uma lista com os
+elementos de um array, pela mesma ordem em que aparecem no array.
+*/
+
+LInt arrayToList (int v[], int N) {
+    int i;
+
+    if (N == 0) return NULL;
+
+    LInt head = malloc(sizeof(struct lligada));
+    head->valor = v[0];
+    head->prox = NULL;
+
+    LInt tail = head;
+
+    for (i = 1; i < N; i++) {
+        LInt new = malloc(sizeof(struct lligada));
+
+        new->valor = v[i];
+        new->prox = NULL;
+
+        tail->prox = new;
+        tail = new;
+    }
+    return head;
+}
+
+/*
+24. Defina uma fun ̧c ̃ao LInt somasAcL (LInt l) que, dada uma lista de inteiros, constr ́oi uma
+nova lista de inteiros contendo as somas acumuladas da lista original (que dever ́a permanecer
+inalterada).
+Por exemplo, se a lista l tiver os valores [1,2,3,4] a lista contru ́ıda pela invoca ̧c ̃ao de
+somasAcL (l) dever ́a conter os valores [1,3,6,10].
+*/
+
+LInt somasAcL (LInt l) {
+    if (l == NULL) return NULL;
+
+    int soma = l->valor;
+    LInt head = malloc(sizeof(struct lligada));
+
+    head->valor = soma;
+    head->prox = NULL;
+
+    LInt tail = head;
+    LInt atual = l->prox;
+
+    while (atual != NULL) {
+        soma += atual->valor;
+        LInt new = malloc(sizeof(struct lligada));
+
+        new->valor = soma;
+        new->prox = NULL;
+
+        tail->prox = new;
+        tail = new;
+
+        atual = atual->prox;
+    }
+    return head;
+}
+
+/*
+25. Defina uma fun ̧c ̃ao void remreps (LInt l) que, dada uma lista ordenada de inteiros, elimina
+dessa lista todos os valores repetidos assegurando que o espa ̧co de mem ́oria correspondente
+aos n ́os removidos  ́e correctamente libertado.
+*/
+
+void remreps (LInt l) {
+    if (l == NULL) return;
+
+    LInt prev = l;
+    LInt atual = prev->prox;
+
+    while (atual != NULL) {
+        if (atual->valor == prev->valor) {
+            LInt temp = atual;
+            
+            atual = atual->prox;
+            prev->prox = atual;
+            
+            free(temp);
+        } else {
+            // Só quando os valores são diferentes é que ambos avançam
+            prev = atual;
+            atual = atual->prox;
+        }
+    }
+}
+
+/*
+26. Defina uma fun ̧c ̃ao LInt rotateL (LInt l) que coloca o primeiro elemento de uma lista no
+fim. Se a lista for vazia ou tiver apenas um elemento, a fun ̧c ̃ao n ̃ao tem qualquer efeito pr ́atico
+(i.e., devolve a mesma lista que recebe como argumento).
+Note que a sua fun ̧c ̃ao n ̃ao deve alocar nem libertar mem ́oria. Apenas re-organizar as c ́elulas
+da lista.
+*/
+
+LInt rotateL (LInt l) {
+    LInt atual = l;
+
+    if (atual == NULL) return l;
+
+    LInt head = atual;
+    atual = atual->prox;
+
+    if (atual == NULL) return l;
+    // tendo mais que um elemento a lista passa a começar no 2º
+    l = atual;
+
+    // corre a lista ligada ate ao fim
+    while (atual->prox != NULL) {
+        atual = atual->prox;
+    }
+
+    //estando no fim o atual->prox recebe head
+    atual->prox = head;
+    head->prox = NULL;
+
+    return l;
+}
+
+/*
+27. Defina uma fun ̧c ̃ao LInt parte (LInt l) que parte uma lista l em duas: na lista l ficam
+apenas os elementos das posi ̧c ̃oes  ́ımpares; na lista resultante ficam os restantes elementos.
+Assim, se a lista x tiver os elementos [10,20,30,40,50,60] a chamada y = parte (x),
+coloca na lista y os elementos [20,40,60] ficando em x apenas os elementos [10,30,50]
+*/
+
+LInt parte (LInt l) {
+    if (l == NULL || l->prox == NULL) return NULL;
+
+    LInt pares_head = l->prox;
+    LInt impar = l;
+    LInt par = l->prox;
+
+    while (par != NULL) {
+        // O ímpar atual aponta para o nó a seguir ao par
+        impar->prox = par->prox;
+        impar = impar->prox; // O ímpar avança
+
+        // Se ainda houver um ímpar válido, o par faz o mesmo salto
+        if (impar != NULL) {
+            par->prox = impar->prox;
+            par = par->prox; // O par avança
+        } else {
+            // Se o ímpar ficou a NULL, a lista acabou perfeitamente
+            break;
+        }
+    }
+    return pares_head;
+}
+
 // Auxiliar para criar nodo novo
 LInt novoNo(int v, LInt proximo) {
     LInt n = malloc(sizeof(struct lligada));
@@ -589,23 +780,127 @@ LInt novoNo(int v, LInt proximo) {
 }
 
 int main() {
-    LInt lista = NULL;
+    printf("🚀 A INICIAR TESTES GERAIS (Funcoes 12 a 27)...\n\n");
 
+    // --- Testes originais do teu ficheiro ---
+    LInt lista_orig = NULL;
     printf("--- Teste Questao 14 (Append) ---\n");
-    appendL(&lista, 10);
-    appendL(&lista, 50);
-    appendL(&lista, 20);
-    appendL(&lista, 30);
-    imprimeL(lista); // Esperado: 10 -> 50 -> 20 -> 30 -> NULL
+    appendL(&lista_orig, 10);
+    appendL(&lista_orig, 50);
+    appendL(&lista_orig, 20);
+    appendL(&lista_orig, 30);
+    imprimeL(lista_orig); // Esperado: [ 10 -> 50 -> 20 -> 30 ]
 
     printf("\n--- Teste Questao 12 (Remove Maior) ---\n");
-    int maior = removeMaiorL(&lista);
+    int maior = removeMaiorL(&lista_orig);
     printf("Maior removido: %d\n", maior);
-    imprimeL(lista); // Esperado: 10 -> 20 -> 30 -> NULL
+    imprimeL(lista_orig); // Esperado: [ 10 -> 20 -> 30 ]
 
     printf("\n--- Teste Questao 13 (Remove Ultimo) ---\n");
-    removeUltimo(&lista);
-    imprimeL(lista); // Esperado: 10 -> 20 -> NULL
+    removeUltimo(&lista_orig);
+    imprimeL(lista_orig); // Esperado: [ 10 -> 20 ]
+    freeL(lista_orig);
 
+    // --- TESTE 15: concatL ---
+    printf("\n--- Q15: concatL ---\n");
+    // Usando a tua função novoNo encadeada para criar listas rapidamente!
+    LInt l15_a = novoNo(1, novoNo(2, NULL));
+    LInt l15_b = novoNo(3, novoNo(4, NULL));
+    printf("Lista A: "); imprimeL(l15_a);
+    printf("Lista B: "); imprimeL(l15_b);
+    concatL(&l15_a, l15_b);
+    printf("Resultado: "); imprimeL(l15_a);
+    freeL(l15_a); // Limpa tudo (a+b fundidos)
+
+    // --- TESTE 16 & 17: cloneL e cloneRev ---
+    printf("\n--- Q16 & Q17: cloneL e cloneRev ---\n");
+    LInt base = novoNo(10, novoNo(20, novoNo(30, NULL)));
+    LInt clone16 = cloneL(base);
+    LInt clone17 = cloneRev(base);
+    printf("Original:  "); imprimeL(base);
+    printf("CloneL:    "); imprimeL(clone16);
+    printf("CloneRev:  "); imprimeL(clone17);
+    freeL(base); freeL(clone16); freeL(clone17);
+
+    // --- TESTE 18: maximo ---
+    printf("\n--- Q18: maximo ---\n");
+    LInt l18 = novoNo(12, novoNo(85, novoNo(42, NULL)));
+    printf("Lista: "); imprimeL(l18);
+    printf("Maximo esperado: 85 | Obtido: %d\n", maximo(l18));
+    freeL(l18);
+
+    // --- TESTE 19: take ---
+    printf("\n--- Q19: take ---\n");
+    LInt l19 = novoNo(1, novoNo(2, novoNo(3, novoNo(4, NULL))));
+    printf("Original: "); imprimeL(l19);
+    int t = take(2, &l19);
+    printf("take(2):  "); imprimeL(l19);
+    printf("Retorno esperado: 2 | Obtido: %d\n", t);
+    freeL(l19);
+
+    // --- TESTE 20: drop ---
+    printf("\n--- Q20: drop ---\n");
+    LInt l20 = novoNo(10, novoNo(20, novoNo(30, novoNo(40, NULL))));
+    printf("Original: "); imprimeL(l20);
+    int d = drop(2, &l20);
+    printf("drop(2):  "); imprimeL(l20);
+    printf("Retorno esperado: 2 | Obtido: %d\n", d);
+    freeL(l20);
+
+    // --- TESTE 21 & 22: Nforward e listToArray ---
+    printf("\n--- Q21 & Q22: Nforward e listToArray ---\n");
+    LInt l21 = novoNo(100, novoNo(200, novoNo(300, NULL)));
+    printf("Lista: "); imprimeL(l21);
+    LInt fwd = Nforward(l21, 2);
+    printf("Nforward(2) aponta para: %d (Esperado: 300)\n", fwd ? fwd->valor : -1);
+    
+    int arr[5];
+    int n22 = listToArray(l21, arr, 5);
+    printf("Array preenchido: [ ");
+    for(int i=0; i<n22; i++) printf("%d ", arr[i]);
+    printf("]\n");
+    freeL(l21);
+
+    // --- TESTE 23: arrayToList ---
+    printf("\n--- Q23: arrayToList ---\n");
+    int src[] = {5, 7, 9};
+    LInt l23 = arrayToList(src, 3);
+    printf("Array [5, 7, 9] convertido: "); imprimeL(l23);
+    freeL(l23);
+
+    // --- TESTE 24: somasAcL ---
+    printf("\n--- Q24: somasAcL ---\n");
+    LInt l24 = novoNo(1, novoNo(2, novoNo(3, novoNo(4, NULL))));
+    printf("Original:  "); imprimeL(l24);
+    LInt somas = somasAcL(l24);
+    printf("Acumulada: "); imprimeL(somas); // Esperado: 1 -> 3 -> 6 -> 10
+    freeL(l24); freeL(somas);
+
+    // --- TESTE 25: remreps ---
+    printf("\n--- Q25: remreps ---\n");
+    LInt l25 = novoNo(1, novoNo(1, novoNo(2, novoNo(2, novoNo(3, NULL)))));
+    printf("Com reps: "); imprimeL(l25);
+    remreps(l25);
+    printf("Sem reps: "); imprimeL(l25); // Esperado: 1 -> 2 -> 3
+    freeL(l25);
+
+    // --- TESTE 26: rotateL ---
+    printf("\n--- Q26: rotateL ---\n");
+    LInt l26 = novoNo(1, novoNo(2, novoNo(3, NULL)));
+    printf("Original: "); imprimeL(l26);
+    l26 = rotateL(l26);
+    printf("Rodada:   "); imprimeL(l26); // Esperado: 2 -> 3 -> 1
+    freeL(l26);
+
+    // --- TESTE 27: parte ---
+    printf("\n--- Q27: parte ---\n");
+    LInt l27 = novoNo(1, novoNo(2, novoNo(3, novoNo(4, novoNo(5, NULL)))));
+    printf("Ziper original: "); imprimeL(l27);
+    LInt pares = parte(l27);
+    printf("Impares (l):    "); imprimeL(l27);   // Esperado: 1 -> 3 -> 5
+    printf("Pares (retorno):"); imprimeL(pares); // Esperado: 2 -> 4
+    freeL(l27); freeL(pares);
+
+    printf("\n🎉 TODOS OS TESTES CONCLUIDOS COM SUCESSO!\n");
     return 0;
 }

@@ -47,8 +47,8 @@ Programação Imperativa | UM
 ## 100 Questões
 
 - [X] Parte 1 - 100% *(50/50)*
-- [ ] Parte 2 - 40% *(20/50)*
+- [ ] Parte 2 - 70% *(35/50)*
 
-![Progress](https://geps.dev/progress/70)
+![Progress](https://geps.dev/progress/85)
 
 </details>
