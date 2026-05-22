@@ -170,3 +170,15 @@ int freeAB (ABin a) {
     free(a);
     return 1 + e + d;
 }
+
+/*
+36. Defina uma fun ̧c ̃ao int pruneAB (ABin *a, int l) que remove (libertando o espa ̧co respec-
+tivo) todos os elementos da  ́arvore *a que est ̃ao a uma profundidade superior a l, retornando
+o n ́umero de elementos removidos.
+Assuma que a profundidade da ra ́ız da  ́arvore  ́e 1, e por isso a invoca ̧c ̃ao pruneAB(&a,0)
+corresponde a remover todos os elementos da  ́arvore a.
+*/
+
+int pruneAB (ABin *a, int l) {
+    
+}
