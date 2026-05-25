@@ -180,5 +180,77 @@ corresponde a remover todos os elementos da  ́arvore a.
 */
 
 int pruneAB (ABin *a, int l) {
+    // 1. O limite de profundidade foi atingido: PODA TUDO!
+    if (l == 0) {
+        int removidos = freeAB(*a);
+        *a = NULL; // Cortar a ligação física com a árvore principal
+        return removidos;
+    }
     
+    // 2. Segurança: se chegámos a uma ponta vazia antes de atingir l, não corta nada
+    if (*a == NULL) return 0;
+
+    // 3. Continuar a descer, diminuindo a "distância" até à lâmina (l - 1)
+    int e = pruneAB(&((*a)->esq), l - 1);
+    int d = pruneAB(&((*a)->dir), l - 1);
+
+    // 4. Devolver a soma de todos os ramos que caíram lá para baixo
+    return e + d;
+}
+
+/*
+37. Defina uma fun ̧c ̃ao int iguaisAB (ABin a, ABin b) que testa se duas  ́arvores s ̃ao iguais
+(tˆem os mesmos elementos e a mesma forma).
+*/
+
+int iguaisAB (ABin a, ABin b) {
+    // 1. Se ambas são vazias, são iguais
+    if (a == NULL && b == NULL) return 1;
+
+    // 2. Se só uma é vazia, não são iguais
+    if (a == NULL || b == NULL) return 0;
+
+    // 3. Ambas têm valor: comparar o valor e os ramos
+    if (a->valor != b->valor) return 0; // Valores diferentes, não são iguais
+
+    // Verificar recursivamente os ramos esquerdo e direito
+    return iguaisAB(a->esq, b->esq) && iguaisAB(a->dir, b->dir);
+}
+
+/*
+38. Defina uma fun ̧c ̃ao LInt nivelL (ABin a, int n) que, dada uma  ́arvore bin ́aria, constr ́oi
+uma lista com os valores dos elementos que est ̃ao armazenados na  ́arvore ao n ́ıvel n (assuma
+que a raiz da  ́arvore est ́a ao n ́ıvel 1).
+*/
+
+LInt nivelL (ABin a, int n) {
+    // 1. Segurança: se chegámos a um beco sem saída ou a um nível inválido
+    if (a == NULL || n < 1) return NULL;
+
+    // 2. Alvo atingido! Estamos no nível pedido.
+    if (n == 1) {
+        LInt novo = malloc(sizeof(struct lligada));
+        novo->valor = a->valor;
+        novo->prox = NULL;
+        return novo; // Devolvemos este bocado de lista para cima
+    }
+
+    // 3. Delegar: descer na árvore subtraindo 1 ao nível desejado
+    LInt esq = nivelL(a->esq, n - 1);
+    LInt dir = nivelL(a->dir, n - 1);
+
+    // 4. Juntar as duas listas (Colar a 'dir' no fim da 'esq')
+    if (esq == NULL) {
+        return dir; // Se a esquerda estiver vazia, o resultado é só a direita
+    }
+
+    // Se a esquerda tem elementos, vamos até ao fundo dela para colar a direita
+    LInt atual = esq;
+    while (atual->prox != NULL) {
+        atual = atual->prox;
+    }
+    atual->prox = dir; // Cola a lista da direita no fim
+
+    // Devolvemos a lista completa
+    return esq;
 }
