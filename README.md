@@ -17,7 +17,7 @@ Programação Imperativa | UM
 | Mini-Teste 4 (Online) | 22 Abr | [X]    | 4/4  |
 | Mini-Teste 5 (TP)     | 8 Mai  | [X]    | 0/4  |
 
-**Nota Final:** 16
+**Nota Mini-Testes:** 16 * 0.2 = 3.2V
 
 ### 🎓 Teste Final (80% da nota final)
 
