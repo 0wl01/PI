@@ -11,15 +11,17 @@ Programação Imperativa | UM
 
 | Momento               | Data   | Estado | Nota |
 | :---                  | :---   | :---:  | :--- |
-| Mini-Teste 1 (Online) | 04 Mar | [X]    | 4/4 |
-| Mini-Teste 2 (TP)     | 27 Mar | [X]    | 4/4 |
-| Mini-Teste 3 (Online) | 7 Abr  | [X]    | 4/4 |
-| Mini-Teste 4 (Online) | 22 Abr | [X]    | 4/4 |
-| Mini-Teste 5 (TP)     | 8 Mai  | [ ]    | - |
+| Mini-Teste 1 (Online) | 04 Mar | [X]    | 4/4  |
+| Mini-Teste 2 (TP)     | 27 Mar | [X]    | 4/4  |
+| Mini-Teste 3 (Online) | 7 Abr  | [X]    | 4/4  |
+| Mini-Teste 4 (Online) | 22 Abr | [X]    | 4/4  |
+| Mini-Teste 5 (TP)     | 8 Mai  | [X]    | 0/4  |
+
+**Nota Final:** 16
 
 ### 🎓 Teste Final (80% da nota final)
 
-- [ ] **Teste Final** (27 Mai) — *Nota: __ / 20*
+- [ ] **Teste Final** (27 Mai) — *Nota: __ / 80*
 
 </details>
 
