@@ -31,9 +31,9 @@ Programação Imperativa | UM
 - [X] Ficha 1
 - [X] Ficha 2
 - [X] Ficha 3
-- [ ] Ficha 4
-- [ ] Ficha 5
-- [ ] Ficha 6
+- [X] Ficha 4
+- [X] Ficha 5
+- [X] Ficha 6
 - [ ] Ficha 7
 - [ ] Ficha 8
 - [ ] Ficha 9
