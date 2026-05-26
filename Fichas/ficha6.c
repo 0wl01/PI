@@ -35,7 +35,7 @@ n ̃ao fˆor poss ́ıvel (i.e., se a stack estiver cheia).
 */
 
 int Spush (SStack s, int x) {
-    if (s->sp >= MAX) return 1; // max capacity
+    if (s->sp >= Max) return 1; // max capacity
     s->values[s->sp++] = x;
     
     return 0;
@@ -80,7 +80,7 @@ struct staticQueue {
 vazia)
 */
 
-void SinitQueu (SQueue q) {
+void SinitQueue (SQueue q) {
     q->front = 0;
     q->length = 0;
 }
@@ -89,7 +89,7 @@ void SinitQueu (SQueue q) {
 (b) int SisEmptyQ (SQueue q) que testa se uma queue  ́e vazia
 */
 
-int SisEmptyQ (SQueue p) {
+int SisEmptyQ (SQueue q) {
     return q->length == 0;
 }
 
@@ -181,7 +181,7 @@ int Dpush (DStack s, int x) {
         if (s->values = NULL) return -1;
     }
     s->values[s->sp] = x;
-    s->sp++
+    s->sp++;
 
     return 0;
 }
