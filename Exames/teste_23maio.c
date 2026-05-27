@@ -169,3 +169,41 @@ typedef struct nodo {
   struct nodo *esq, *dir; 
 } *ABin;
 
+// Função auxiliar: calcula a distância da raiz da árvore 'a' até ao nó com o valor 'v'
+int profundidade(ABin a, int v) {
+    int passos = 0;
+    
+    while (a != NULL && a->valor != v) {
+        if (v < a->valor) {
+            a = a->esq;
+        } else {
+            a = a->dir;
+        }
+        passos++;
+    }
+    
+    return passos;
+}
+
+// Função principal
+int parentesco(ABin a, int x, int y) {
+    // 1. Encontrar o Menor Ancestral Comum (o "cruzamento")
+    while (a != NULL) {
+        if (x < a->valor && y < a->valor) {
+            // Ambos os valores são menores: o cruzamento está mais à esquerda
+            a = a->esq;
+        } 
+        else if (x > a->valor && y > a->valor) {
+            // Ambos os valores são maiores: o cruzamento está mais à direita
+            a = a->dir;
+        } 
+        else {
+            // Um é maior e o outro é menor (ou um deles é o próprio nó atual).
+            // Encontrámos o cruzamento!
+            break;
+        }
+    }
+    
+    // 2. Calcular a distância do cruzamento até x e até y, e somar as duas
+    return profundidade(a, x) + profundidade(a, y);
+}
