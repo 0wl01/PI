@@ -39,7 +39,7 @@ Programação Imperativa | UM
 - [ ] Ficha 9
 - [ ] Ficha 10
 
-![Progress](https://geps.dev/progress/30)
+![Progress](https://geps.dev/progress/60)
 
 </details>
 
@@ -49,8 +49,8 @@ Programação Imperativa | UM
 ## 100 Questões
 
 - [X] Parte 1 - 100% *(50/50)*
-- [ ] Parte 2 - 70% *(35/50)*
+- [ ] Parte 2 - 70% *(38/50)*
 
-![Progress](https://geps.dev/progress/85)
+![Progress](https://geps.dev/progress/88)
 
 </details>
